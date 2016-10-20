@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  root to: 'search#search'
-  get '/search' => 'search#search', as: :search
+
+  root to: 'articles#index'
+  resources :articles, only: [ :index ]
+  resources :properties, only: [ :index ]
 end

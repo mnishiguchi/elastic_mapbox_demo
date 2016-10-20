@@ -1,0 +1,41 @@
+# == Schema Information
+#
+# Table name: properties
+#
+#  id         :integer          not null, primary key
+#  raw_hash   :json
+#  address    :string
+#  city       :string
+#  county     :string
+#  state      :string
+#  zip        :string
+#  country    :string
+#  latitude   :float
+#  longigute  :float
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  raw_hash: 
+  address: MyString
+  city: MyString
+  county: MyString
+  state: MyString
+  zip: MyString
+  country: MyString
+  latitude: 1.5
+  longigute: 1.5
+
+two:
+  raw_hash: 
+  address: MyString
+  city: MyString
+  county: MyString
+  state: MyString
+  zip: MyString
+  country: MyString
+  latitude: 1.5
+  longigute: 1.5

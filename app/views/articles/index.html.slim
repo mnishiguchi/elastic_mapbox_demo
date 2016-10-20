@@ -1,0 +1,33 @@
+.jumbotron
+  h2 Articles
+
+  = form_tag articles_path, method: :get
+    = text_field_tag :query, params[:query]
+    = button_tag 'Search'
+
+- if @results
+  h2.page-header
+    | Search
+    small
+      = ' (' + pluralize(@results.count, 'result') + ')'
+      | &nbsp;
+      - if @results.respond_to? :took
+        small = 'performed in ' + ( @results.took.to_f / 1000 ).to_s + ' seconds'
+
+  - if @results.respond_to? :response and (suggestion = autosuggest_aggregate(@results.response.suggest, [:title, :body], params[:query]))
+    p
+      | Search instead for:
+      = link_to suggestion, articles_path( query: suggestion )
+
+  - @results.each do |result|
+    article
+      h3 = result.title
+      - if result.respond_to? :highlight
+        p = raw result.highlight.body.to_a.join(' ')
+      - else
+        p = raw truncate(result.body, length: 300)
+
+  - if @results.count == 0
+    p No results found
+- else
+  p Enter your search term using the form above

@@ -25,9 +25,15 @@ postgresql
 - Document-oriented
 - [term suggester](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-term.html)
 
-#### Ruby gems
+
+## Elasticsearch-related Ruby gems
+
+#### Low-level
 - [The official elasticsearch  gem](https://github.com/elastic/elasticsearch-ruby)
 - [The elasticsearch-model  gem](https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-model)
+
+#### High-level
+- [ankane/searchkick](https://github.com/ankane/searchkick)
 
 
 #### Structure
@@ -53,6 +59,8 @@ bundle exec rake db:migrate
 - [Elasticsearch with Ruby on Rails](http://tutorials.pluralsight.com/ruby-ruby-on-rails/elasticsearch-with-ruby-on-rails)
 - [elastic/elasticsearch-rails gem](https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-model)
 - [search-suggesters-term](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-term.html)
+- [Full-Text Search in Rails Using Elasticsearch](https://code.tutsplus.com/articles/full-text-search-in-rails-using-elasticsearch--cms-22920) by Pedro Alonso
+- [How to setup elasticsearch on Heroku?](http://stackoverflow.com/a/38657992/3837223)
 
 
 ## License

@@ -11,7 +11,8 @@ module SearchHelper
       # Iterate over query words
       response.send(field).to_a.each do |word|
         # If any options are available
-        if word.options.length > 0
+        length = word.try(:options)&.length
+        if length && length > 0
           # Append word if it doesn't already exist
           new_word = false
           unless words.include? word.text
