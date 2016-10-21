@@ -1,6 +1,6 @@
 class SearchForProperties < Search
 
-  private def search_class
+  private def search_model
     Property
   end
 
@@ -23,9 +23,9 @@ class SearchForProperties < Search
       where[:management_name] = options[:management_name]
     end
 
-    if options[:floorplan_rents].present?
-      where[:floorplan_rents] = { lte: options[:floorplan_rents] }
-    end
+    # if options[:floorplan_rents].present?
+    #   where[:floorplan_rents] = { lte: options[:floorplan_rents] }
+    # end
 
     where
   end

@@ -3,7 +3,7 @@ class PropertiesController < ApplicationController
   def index
     @properties = SearchForProperties.new(
                     query:   params[:q],
-                    options: search_params
+                    options: search_params,
                   ).search
   end
 

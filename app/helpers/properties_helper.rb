@@ -64,11 +64,11 @@ module PropertiesHelper
     )
   end
 
-  def floorplan_rents_select_tag(params)
-    select_tag(
-      "floorplan_rents",
-      options_for_select(Property.joins(:floorplans).pluck(:rent).uniq.sort, params[:floorplan_rents]),
-      include_blank: true
-    )
-  end
+  # def floorplan_rents_select_tag(params)
+  #   select_tag(
+  #     "floorplan_rents",
+  #     options_for_select(Property.joins(:floorplans).pluck(:rent).uniq.sort, params[:floorplan_rents]),
+  #     include_blank: true
+  #   )
+  # end
 end

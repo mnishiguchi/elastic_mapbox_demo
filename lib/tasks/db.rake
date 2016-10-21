@@ -39,7 +39,16 @@ namespace :db do
           end
         end
       end
+
+      # Add data to the search index
+      # https://github.com/ankane/searchkick
+      Property.reindex
     end
+
+
+    # ---
+    # ---
+
 
     task :articles => :environment do
       Article.destroy_all

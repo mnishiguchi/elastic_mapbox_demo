@@ -20,6 +20,7 @@ gem 'faker'
 gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
+gem 'kaminari'
 gem "ruby-progressbar"
 gem 'sass-rails', '~> 5.0'
 # gem 'simple_form'

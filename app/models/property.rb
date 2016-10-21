@@ -18,7 +18,9 @@
 #
 
 class Property < ApplicationRecord
-  searchkick
+  searchkick word_middle: [
+    :name  
+  ]
 
   belongs_to :management
   has_many :floorplans
