@@ -26,8 +26,9 @@ class Property < ApplicationRecord
   # Tells Searchkick which columns we want it to use in searches other than
   # the attributes on the model itself.
   # ---
-  # NOTE: the purpose of these indices is for searching, not for data management.
-  # NOTE: We need reindex after making changes to the search attributes so that
+  # NOTE:
+  # - The purpose of these indices is for searching, not for data management.
+  # - We need reindex after making changes to the search attributes so that
   # ElasticSearch can get notified of the changes.
   def search_data
     attrs = attributes.dup

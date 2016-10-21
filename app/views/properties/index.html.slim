@@ -1,33 +1,8 @@
+= provide(:title, "Search for properties")
+
 .well
   h2.page-header
     | Search for a property
-  = form_tag properties_path, method: :get, role: "search" do |f|
-    fieldset
-      label Keywords
-      = search_field_tag "q", params[:q]
-    fieldset
-      label Sort by:
-      = select_tag "sort_attribute", options_for_select({"Name" => "name", "City" => "city", "Address" => "address", "Updated at" => "updated_at"}, params[:sort_attribute]), include_blank: true
-      = select_tag "sort_order", options_for_select({"Ascending" => "asc", "Descending" => "desc"}, params[:sort_order]), include_blank: true
-    fieldset
-      label Filter by city:
-      = select_tag "city", options_for_select(Property.pluck("city").uniq, params[:city]), include_blank: true
-    fieldset
-      = submit_tag "Search", class: "btn btn-primary"
-      = submit_tag "Reset", type: :reset, class: "btn btn-default"
+  = render "search_form"
 
-table.table.table-bordered
-  thead
-    tr
-      th Name
-      th Address
-      th City
-      th Updated at
-  thead
-  tbody
-    - @properties.each do |property|
-      tr
-        td = property.name
-        td = property.address
-        td = property.city
-        td = property.updated_at
+= render "search_result"

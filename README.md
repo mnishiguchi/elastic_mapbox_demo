@@ -41,6 +41,10 @@ postgresql
 | column   |  field  ||
 
 
+## Searchkick and ActiveRecord
+- When we use ElasticSearch, we cannot user ActiveRecord scoping. Everything needs to take place within the Searchkick.
+
+
 ## Get started
 
 ```bash

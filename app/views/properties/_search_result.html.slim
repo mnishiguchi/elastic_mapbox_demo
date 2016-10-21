@@ -1,0 +1,19 @@
+.table-responsive
+  table.table.table-bordered
+    thead
+      tr
+        th Name
+        th Address
+        th City
+        th State
+        th Zip
+        th Updated at
+    tbody
+      - @properties.each do |property|
+        tr
+          td = property.name
+          td = property.address
+          td = property.city
+          td = property.state
+          td = property.zip
+          td = property.updated_at

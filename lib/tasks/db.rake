@@ -1,5 +1,5 @@
 namespace :db do
-  task :properties => :environment do
+  task :seed => :environment do
     %w(db:seed:properties db:seed:articles).each do |rake_task|
       Rake::Task[rake_task].invoke
     end
@@ -22,16 +22,18 @@ namespace :db do
             :address    => Faker::Address.street_address,
             :city       => Faker::Address.city,
             :state      => Faker::Address.state,
-            :zip        => Faker::Address.zip,
+            :zip        => Faker::Address.zip[0..4],
             :country    => Faker::Address.country,
             :latitude   => Faker::Address.latitude,
             :longitude  => Faker::Address.longitude,
           )
 
+          rents = [800, 1000, 1500, 1600, 1800, 2000]
+
           20.times do
             property.floorplans.create!(
               :name        => Faker::Color.color_name,
-              :rent        => Faker::Commerce.price,
+              :rent        => rents.sample,
               :description => Faker::Hacker.say_something_smart,
             )
           end

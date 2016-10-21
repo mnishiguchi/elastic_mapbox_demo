@@ -14,7 +14,7 @@ class Search
   def search
     constraints = {
       page:     options[:page],
-      per_page: options[:per_page] || DEFAULT_PER_PAGE
+      per_page: DEFAULT_PER_PAGE
     }
     constraints[:where] = where
     constraints[:order] = order
@@ -22,6 +22,7 @@ class Search
     search_class.search(@query, constraints)
   end
 
+  # Provides the constant of the class that we want to search on.
   private def search_class
     raise NotImplementedError
   end

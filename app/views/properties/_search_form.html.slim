@@ -1,0 +1,36 @@
+= form_tag properties_path, method: :get, role: "search" do |f|
+  .form-group
+    = search_field_tag "q", params[:q], placeholder: "Enter search keywords...", class: "form-control"
+
+  .row
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          .h4 Filter by
+        .panel-body
+          .form-group
+            label city:
+            = city_select_tag(params)
+          .form-group
+            label state:
+            = state_select_tag(params)
+          .form-group
+            label zip:
+            = zip_select_tag(params)
+          .form-group
+            label floorplan_rents:
+            = floorplan_rents_select_tag(params)
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          .h4 Sort by
+        .panel-body
+          .form-group
+            = sort_attribute_select_tag(params)
+            = sort_order_select_tag(params)
+  .row
+    .col-sm-12
+      .form-group
+        .pull-right
+          = submit_tag "Reset", type: :reset, class: "btn btn-default"
+          = submit_tag "Search", class: "btn btn-primary"
