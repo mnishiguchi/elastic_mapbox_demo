@@ -36,7 +36,7 @@ postgresql
 - [ankane/searchkick](https://github.com/ankane/searchkick)
 
 
-#### Structure
+## Structure
 
 | RDB      | ES      ||
 |---|---|---|
@@ -53,6 +53,10 @@ bundle install
 bundle exec rake db:migrate
 ```
 
+## Models in this app
+
+![](erd/erd.jpg)
+
 
 ## Resources
 
@@ -61,7 +65,8 @@ bundle exec rake db:migrate
 - [search-suggesters-term](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters-term.html)
 - [Full-Text Search in Rails Using Elasticsearch](https://code.tutsplus.com/articles/full-text-search-in-rails-using-elasticsearch--cms-22920) by Pedro Alonso
 - [How to setup elasticsearch on Heroku?](http://stackoverflow.com/a/38657992/3837223)
-
+- [https://github.com/aimee-ault/SearchkickSearch](https://github.com/aimee-ault/SearchkickSearch)
+- [How to Use Searchkick and ElasticSearch in Your Rails App For Complex Search Indexing](http://aimeeault.com/2016/02/05/how-to-use-searchkick-and-elasticsearch-in-your-rails-app-for-complex-search-indexing/)
 
 ## License
 

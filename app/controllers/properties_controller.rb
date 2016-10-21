@@ -1,15 +1,19 @@
 class PropertiesController < ApplicationController
-  
-  def index
-    # Just call our Page.search method.
-    # Ensure the controller doesn't fail if the search form is submitted empty.
-    @results = Article.search(params[:query]) unless params[:query].blank?
 
-    # NOTE: It is important to have our view support both
-    # Elasticsearch::Model::Response and ActiveRecord::Relation.
-    # Assuming that the results from Elasticsearch/ActiveRecord are stored in
-    # the @results variable, we will always need to run
-    # @results.respond_to?(:es_method) and verify that the Elasticsearch method
-    # exists before we call it.
+  def index
+    @movies = SearchProperties.new(
+                query: params[:q],
+                options: search_params
+              ).search
+  end
+
+  def search_params
+    params.permit(
+      :page,
+      :per_page,
+      :sort_attribute,
+      :sort_order,
+      :genre
+    )
   end
 end

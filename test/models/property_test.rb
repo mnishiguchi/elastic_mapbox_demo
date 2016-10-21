@@ -2,18 +2,19 @@
 #
 # Table name: properties
 #
-#  id         :integer          not null, primary key
-#  raw_hash   :json
-#  address    :string
-#  city       :string
-#  county     :string
-#  state      :string
-#  zip        :string
-#  country    :string
-#  latitude   :float
-#  longigute  :float
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :integer          not null, primary key
+#  name          :string
+#  address       :string
+#  city          :string
+#  county        :string
+#  state         :string
+#  zip           :string
+#  country       :string
+#  latitude      :float
+#  longitude     :float
+#  management_id :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 
 require 'test_helper'

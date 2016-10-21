@@ -1,33 +1,28 @@
-.jumbotron
-  h2 Properties
+= form_tag properties_path, method: :get, role: "search" do |f|
+fieldset
+  label Search for a property:
+  = search_field_tag "q", params[:q]
+fieldset
+  label Sort by:
+  = select_tag "sort_attribute", options_for_select({"Title" => "title", "Genre" => "genre", "Release Date" => "release_date"}, params[:sort_attribute]), include_blank: true
+  = select_tag "sort_order", options_for_select({"Ascending" => "asc", "Descending" => "desc"}, params[:sort_order]), include_blank: true
+fieldset
+  label Filter by genre:
+  = select_tag "genre", options_for_select(Movie.pluck("genre").uniq, params[:genre]), include_blank: true
+fieldset
+  = submit_tag "Search"
+  = submit_tag "Reset", type: :reset
 
-  = form_tag properties_path, method: :get
-    = text_field_tag :query, params[:query]
-    = button_tag 'Search'
-
-- if @results
-  h2.page-header
-    | Search
-    small
-      = ' (' + pluralize(@results.count, 'result') + ')'
-      | &nbsp;
-      - if @results.respond_to? :took
-        small = 'performed in ' + ( @results.took.to_f / 1000 ).to_s + ' seconds'
-
-  - if @results.respond_to? :response and (suggestion = autosuggest_aggregate(@results.response.suggest, [:zip, :raw_hash], params[:query]))
-    p
-      | Search instead for:
-      = link_to suggestion, properties_path( query: suggestion )
-
-  - @results.each do |result|
-    article
-      h3 = result.zip
-      - if result.respond_to? :highlight
-        p = raw result.highlight.raw_hash.to_a.join(' ')
-      - else
-        p = raw truncate(result.raw_hash, length: 300)
-
-  - if @results.count == 0
-    p No results found
-- else
-  p Enter your search term using the form above
+table
+  thead
+    tr
+      th Title
+      th Genre
+      th Release Date
+  thead
+  tbody
+    - @properties.each do |property| 
+    tr
+      td <= property.title
+      td <= property.genre
+      td <= property.release_date.strftime("d/m/Y")
