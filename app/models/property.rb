@@ -22,4 +22,21 @@ class Property < ApplicationRecord
 
   belongs_to :management
   has_many :floorplans
+
+  # Tells Searchkick which columns we want it to use in searches other than
+  # the attributes on the model itself.
+  # ---
+  # NOTE: the purpose of these indices is for searching, not for data management.
+  # NOTE: We need reindex after making changes to the search attributes so that
+  # ElasticSearch can get notified of the changes.
+  def search_data
+    attrs = attributes.dup
+    relational = {
+      management_name:        management.name,
+      floorplan_names:        floorplans.map(&:name),
+      floorplan_descriptions: floorplans.map(&:description),
+      floorplan_rents:        floorplans.map(&:rent),
+    }
+    attrs.merge!(relational)
+  end
 end

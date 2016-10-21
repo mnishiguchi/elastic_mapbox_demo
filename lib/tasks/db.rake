@@ -1,6 +1,6 @@
 namespace :db do
   task :properties => :environment do
-    %w(db:seed:propertoes db:seed:articles).each do |rake_task|
+    %w(db:seed:properties db:seed:articles).each do |rake_task|
       Rake::Task[rake_task].invoke
     end
   end
@@ -16,7 +16,7 @@ namespace :db do
       ])
 
       Management.all.each do |management|
-        2.times do
+        10.times do
           property = management.properties.create!(
             :name       => Faker::Team.name,
             :address    => Faker::Address.street_address,
@@ -28,7 +28,7 @@ namespace :db do
             :longitude  => Faker::Address.longitude,
           )
 
-          5.times do
+          20.times do
             property.floorplans.create!(
               :name        => Faker::Color.color_name,
               :rent        => Faker::Commerce.price,

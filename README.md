@@ -3,11 +3,6 @@ Elastic search sample app
 
 In this repository, I will study Elastic Search with Ruby on Rails.
 
-This app is based on a sample application of the tutorial
-[Elasticsearch with Ruby on Rails](http://tutorials.pluralsight.com/ruby-ruby-on-rails/elasticsearch-with-ruby-on-rails)
- by Itay Grudev.
-
-[https://github.com/itay-grudev/es-tutorial](https://github.com/itay-grudev/es-tutorial)
 
 ## Environment
 
@@ -51,7 +46,9 @@ postgresql
 ```bash
 bundle install
 bundle exec rake db:migrate
+bundle exec rake db:seed
 ```
+
 
 ## Models in this app
 
@@ -67,6 +64,10 @@ bundle exec rake db:migrate
 - [How to setup elasticsearch on Heroku?](http://stackoverflow.com/a/38657992/3837223)
 - [https://github.com/aimee-ault/SearchkickSearch](https://github.com/aimee-ault/SearchkickSearch)
 - [How to Use Searchkick and ElasticSearch in Your Rails App For Complex Search Indexing](http://aimeeault.com/2016/02/05/how-to-use-searchkick-and-elasticsearch-in-your-rails-app-for-complex-search-indexing/)
+- [Elasticsearch with Ruby on Rails](http://tutorials.pluralsight.com/ruby-ruby-on-rails/elasticsearch-with-ruby-on-rails)
+ by Itay Grudev
+- [https://github.com/itay-grudev/es-tutorial](https://github.com/itay-grudev/es-tutorial)
+
 
 ## License
 
