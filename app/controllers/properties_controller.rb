@@ -7,6 +7,10 @@ class PropertiesController < ApplicationController
                   ).search
   end
 
+  def show
+    @property = Property.find(params[:id])
+  end
+
   def search_params
     params.permit(
       :page,

@@ -23,12 +23,14 @@ ActiveRecord::Schema.define(version: 20161021000002) do
   end
 
   create_table "floorplans", force: :cascade do |t|
-    t.float    "rent"
-    t.text     "description"
     t.string   "name"
+    t.text     "description"
+    t.float    "rent"
+    t.integer  "bathroom_count"
+    t.integer  "bedroom_count"
     t.integer  "property_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.index ["property_id"], name: "index_floorplans_on_property_id", using: :btree
   end
 
@@ -40,6 +42,7 @@ ActiveRecord::Schema.define(version: 20161021000002) do
 
   create_table "properties", force: :cascade do |t|
     t.string   "name"
+    t.text     "description"
     t.string   "address"
     t.string   "city"
     t.string   "county"

@@ -1,8 +1,9 @@
-= provide(:title, "Search for properties")
+= provide(:title, "#{pluralize(@properties.count, "apartment")} found")
 
 .well
   h2.page-header
     | Search for a property
+    
   = render "search_form"
 
 = render "search_result"

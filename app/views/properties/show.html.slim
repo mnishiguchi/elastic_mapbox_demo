@@ -1,0 +1,46 @@
+= provide(:title, @property.name)
+
+.h1.page-header
+  = @property.name
+
+.table-responsive
+  table.table.table-bordered
+    tbody
+      tr
+        td Description
+        td = @property.description
+      tr
+        td Address
+        td = @property.address
+      tr
+        td City
+        td = @property.city
+      tr
+        td State
+        td = @property.state
+      tr
+        td Zip
+        td = @property.zip
+        
+hr
+
+h4 Floorplans
+
+.table-responsive
+  table.table.table-bordered
+    thead
+      tr
+        th Name
+        th Description
+        th Bathrooms
+        th Bedrooms
+        th Rent
+    tbody
+      - @property.floorplans.each do |floorplan|
+        tr
+          td = floorplan.name
+          td = floorplan.description
+          td = floorplan.bathroom_count
+          td = floorplan.bedroom_count
+          td = floorplan.rent
+        

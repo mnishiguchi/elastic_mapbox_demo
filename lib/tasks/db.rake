@@ -1,7 +1,10 @@
 namespace :db do
   task :seed => :environment do
-    %w(db:seed:properties db:seed:articles).each do |rake_task|
-      Rake::Task[rake_task].invoke
+    [
+      "db:seed:properties",
+      "db:seed:articles"
+    ].each do |rake_task|
+      Rake::Task[ rake_task ].invoke
     end
   end
 
@@ -9,32 +12,38 @@ namespace :db do
 
     task :properties => :environment do
 
-      Management.create!([
+      managements = Management.create!([
         { name: "Ninja" },
         { name: "Samurai" },
         { name: "Shogun" },
       ])
 
-      Management.all.each do |management|
+      rents           = (800..2000).step(100).to_a
+      bedroom_counts  = (1..4).to_a
+      bathroom_counts = (1..3).to_a
+
+      managements.each do |management|
+
         10.times do
           property = management.properties.create!(
-            :name       => Faker::Team.name,
-            :address    => Faker::Address.street_address,
-            :city       => Faker::Address.city,
-            :state      => Faker::Address.state,
-            :zip        => Faker::Address.zip[0..4],
-            :country    => Faker::Address.country,
-            :latitude   => Faker::Address.latitude,
-            :longitude  => Faker::Address.longitude,
+            :name        => Faker::Team.name,
+            :description => Faker::Hacker.say_something_smart,
+            :address     => Faker::Address.street_address,
+            :city        => Faker::Address.city,
+            :state       => Faker::Address.state,
+            :zip         => Faker::Address.zip[0..4],
+            :country     => Faker::Address.country,
+            :latitude    => Faker::Address.latitude,
+            :longitude   => Faker::Address.longitude,
           )
-
-          rents = [800, 1000, 1500, 1600, 1800, 2000]
 
           20.times do
             property.floorplans.create!(
-              :name        => Faker::Color.color_name,
-              :rent        => rents.sample,
-              :description => Faker::Hacker.say_something_smart,
+              :name           => Faker::Color.color_name,
+              :description    => Faker::Hacker.say_something_smart,
+              :rent           => rents.sample,
+              :bedroom_count  => bedroom_counts.sample,
+              :bathroom_count => bathroom_counts.sample,
             )
           end
         end

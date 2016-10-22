@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.3.1"
+# ruby "2.3.1"
 
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'pg'
@@ -7,8 +7,8 @@ gem 'puma', '~> 3.0'
 
 #==> Full-text search
 # For minute configurations
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
+gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
 # For simple DSL
 gem 'searchkick'
 
@@ -39,8 +39,8 @@ end
 
 group :development do
   gem 'annotate'
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  # gem 'better_errors'
+  # gem 'binding_of_caller'
   # gem 'guard'
   # gem 'guard-minitest'
   gem 'listen', '~> 3.0.5'

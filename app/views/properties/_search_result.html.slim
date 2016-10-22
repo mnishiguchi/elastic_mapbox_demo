@@ -1,26 +1,26 @@
 h3.page-header
-  = pluralize(@properties.count, 'result')
+  = pluralize(@properties.count, "result")
   | &nbsp;
-  - if @properties.respond_to? :took
-    small = 'performed in ' + ( @properties.took.to_f / 1000 ).to_s + ' seconds'
+  - if @properties.respond_to?(:took)
+    small= "performed in #{(@properties.took.to_f / 1000 ).to_s} seconds"
 
 .table-responsive
   table.table.table-bordered
     thead
       tr
         th Name
+        th description
         th Address
         th City
         th State
         th Zip
-        th Updated at
     tbody
       = paginate(@properties)
       - @properties.each do |property|
         tr
-          td = property.name
+          td = link_to(property.name, property_path(property))
+          td = property.description
           td = property.address
           td = property.city
           td = property.state
           td = property.zip
-          td = property.updated_at
