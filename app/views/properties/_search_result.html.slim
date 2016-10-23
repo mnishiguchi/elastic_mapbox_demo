@@ -1,8 +1,8 @@
-h3.page-header
-  = pluralize(@properties.count, "result")
+h3.page-header#result_meta
+  = pluralize(@properties.total_count, "result")
   | &nbsp;
   - if @properties.respond_to?(:took)
-    small= "performed in #{(@properties.took.to_f / 1000 ).to_s} seconds"
+    small = "performed in #{took_in_seconds(@properties)} seconds"
 
 .table-responsive
   table.table.table-bordered
@@ -11,16 +11,24 @@ h3.page-header
         th Name
         th description
         th Address
-        th City
-        th State
-        th Zip
+        th Management
     tbody
       = paginate(@properties)
       - @properties.each do |property|
         tr
           td = link_to(property.name, property_path(property))
           td = property.description
-          td = property.address
-          td = property.city
-          td = property.state
-          td = property.zip
+          td = property.full_address
+          td = property.management.name
+
+javascript:
+
+  $(document).on("turbolinks:load", function(){
+    if ( $("#q").val() === "" ) {
+      $("#result_meta").hide();  
+    } else {
+      $("#result_meta").show();  
+    }
+  });
+
+  

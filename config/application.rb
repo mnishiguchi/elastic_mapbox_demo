@@ -12,6 +12,6 @@ module ElasticSearchDemo
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.autoload_paths << "#{config.root}/app/services"
+    config.autoload_paths << "#{config.root}/app/searches"
   end
 end

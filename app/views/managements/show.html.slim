@@ -1,0 +1,36 @@
+= provide(:title, @management.name)
+
+.h2.page-header
+  = @management.name
+
+.table-responsive
+  table.table.table-bordered
+    tbody
+      tr
+        td Management
+        td = @management.name
+      tr
+        td Property count
+        td = @management.properties.count
+
+hr
+
+h4 Properties
+
+.table-responsive
+  table.table.table-bordered
+    thead
+      tr
+        th Name
+        th Description
+        th Address
+    tbody
+      - @management.properties.each do |property|
+        tr
+          td = link_to(property.name, property_path(property))
+          td = property.description
+          td = property.full_address
+
+
+        
+        

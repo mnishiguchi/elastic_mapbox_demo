@@ -1,0 +1,8 @@
+= provide(:title, "#{pluralize(@floorplans.count, "floorplan")} found")
+
+.jumbotron
+  h2 Search for floorplans
+    
+  = render "search_form"
+
+= render "search_result"

@@ -19,28 +19,34 @@
 #
 
 class Property < ApplicationRecord
-  searchkick word_middle: [
-    :name  
-  ]
+  searchkick
 
   belongs_to :management
   has_many :floorplans
 
-  # Tells Searchkick which columns we want it to use in searches other than
-  # the attributes on the model itself.
-  # ---
-  # NOTE:
-  # - The purpose of these indices is for searching, not for data management.
-  # - We need reindex after making changes to the search attributes so that
-  # ElasticSearch can get notified of the changes.
+
+  # Allows us to control what data is indexed for searching.
+  # https://github.com/ankane/searchkick#indexing
+  # NOTE: We need to reindex after making changes to the search attributes.
   def search_data
-    attrs = attributes.dup
+    search_attributes = {
+      name:        name,
+      description: description,
+      address:     address,
+      city:        city,
+      state:       state,
+      zip:         zip,
+    }
+
     relational = {
       management_name:        management.name,
-      floorplan_names:        floorplans.map(&:name),
       floorplan_descriptions: floorplans.map(&:description),
-      floorplan_rents:        floorplans.map(&:rent),
     }
-    attrs.merge!(relational)
+
+    search_attributes.merge!(relational)
+  end
+
+  def full_address
+    "#{address}, #{city}, #{state} #{zip}"
   end
 end

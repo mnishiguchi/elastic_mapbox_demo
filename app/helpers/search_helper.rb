@@ -1,5 +1,9 @@
 module SearchHelper
 
+  def took_in_seconds(result)
+    (result.took.to_f / 1000 ).to_s
+  end
+
   # Aggregates suggestions and builds a new string, based on every suggestion
   # with rating above 0.65.
   def autosuggest_aggregate(response, fields, query)

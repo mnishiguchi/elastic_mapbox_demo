@@ -1,0 +1,25 @@
+= provide(:title, @floorplan.name)
+
+.h1.page-header
+  = @floorplan.name
+
+.table-responsive
+  table.table.table-bordered
+    tbody
+      tr
+        td Description
+        td = @floorplan.description
+      tr
+        td Rent
+        td = @floorplan.rent
+      tr
+        td Beds
+        td = @floorplan.bedroom_count
+      tr
+        td Baths
+        td = @floorplan.bathroom_count
+      tr
+        td Address
+        td = @floorplan.property.full_address
+      
+        

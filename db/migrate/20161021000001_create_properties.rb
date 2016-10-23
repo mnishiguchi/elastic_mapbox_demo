@@ -11,7 +11,9 @@ class CreateProperties < ActiveRecord::Migration[5.0]
       t.string :country
       t.float  :latitude
       t.float  :longitude
-      
+      t.json   :amenities
+      t.json   :pet
+          
       t.references :management, foreign_key: true
 
       t.timestamps

@@ -1,31 +1,6 @@
 = form_tag properties_path, method: :get, role: "search" do |f|
-  .form-group
-    = search_field_tag "q", params[:q], placeholder: "Search by location", class: "form-control"
-
-  .row
-    .col-sm-6
-      .panel.panel-default
-        .panel-heading
-          .h4 Rent
-        .panel-body
-          = text_field_tag "min", "", placeholder: "Min Rent"
-          = text_field_tag "max", "", placeholder: "Max Rent"
- 
-    .col-sm-6
-      .panel.panel-default
-        .panel-heading
-          .h4 Beds and Baths
-        .panel-body
-          .form-group
-            label bedrooms:
-            = bedroom_count_select_tag(params)
-          .form-group
-            label bathrooms:
-            = bathroom_count_select_tag(params)
-            
-  .row
-    .col-sm-12
-      .form-group
-        .pull-right
-          = submit_tag "Reset", type: :reset, class: "btn btn-default"
-          = submit_tag "Search", class: "btn btn-primary"
+  .form-group 
+    .col-xs-9
+      = search_field_tag "q", params[:q], placeholder: "Search by keyword", class: "form-control"
+    .col-xs-3
+      = submit_tag "Search", class: "btn btn-primary"

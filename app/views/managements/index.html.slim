@@ -1,0 +1,15 @@
+= provide(:title, "Managements")
+
+h2.page-header Managements
+
+.table-responsive
+  table.table.table-bordered
+    thead
+      tr
+        th Name
+        th Property count
+    tbody
+      - @managements.each do |management|
+        tr
+          td = link_to(management.name, management_path(management))
+          td = management.properties.count

@@ -1,0 +1,119 @@
+- :name:         "White House"
+  :description:  "The White House is the official residence and principal workplace of the President of the United State."
+  :address:      "1600 Pennsylvania Ave NW"
+  :city:         "Washington"
+  :state:        "DC"
+  :zip:          "20500"
+  :country:      "United States"
+  :latitude:     38.897676
+  :longitude:    -77.036529
+  :amenities:
+    community:
+      air_conditioner: true
+      unit_washer_dryer: true
+      washer_dryer_hookup: true
+      dishwasher: true
+      wheelchair_access: true
+  :pet:
+    dog: true
+    cat: true
+
+- :name:         "White Castle"
+  :description:  "White Castle is an American regional hamburger restaurant chain in the Midwestern and Mid-Atlantic United States, generally credited as the first fast-food chain in the United States."
+  :address:      "1514 Connecticut Ave NW"
+  :city:         "Washington"
+  :state:        "DC"
+  :zip:          "22036"
+  :country:      "United States"
+  :latitude:     38.934085
+  :longitude:    -77.057641
+  :amenities:
+    community:
+      air_conditioner: true
+      unit_washer_dryer: true
+      washer_dryer_hookup: true
+      dishwasher: true
+      wheelchair_access: true
+  :pet:
+    dog: true
+    cat: true
+
+- :name:         "White Temple"
+  :description:  "A temple (from the Latin word templum) is a structure reserved for religious or spiritual rituals and activities such as prayer and sacrifice."
+  :address:      " 6500 Lakehaven Ln"
+  :city:         "Fairfax Station"
+  :state:        "VA"
+  :zip:          "22039"
+  :country:      "United States"
+  :latitude:     38.773840
+  :longitude:    -77.300721
+  :amenities:
+    community:
+      air_conditioner: true
+      unit_washer_dryer: true
+      washer_dryer_hookup: true
+      dishwasher: true
+      wheelchair_access: true
+  :pet:
+    dog: true
+    cat: true
+
+- :name:         "Dulles Town Center"
+  :description:  "The Dulles Town Center is a two-level enclosed shopping mall in Sterling, Loudoun County, Virginia, United States, located five miles north of the Washington Dulles International Airport."
+  :address:      "21100 Dulles Town Cir"
+  :city:         "Sterling"
+  :state:        "VA"
+  :zip:          "20166"
+  :country:      "United States"
+  :latitude:     39.024243
+  :longitude:    -77.415367
+  :amenities:
+    community:
+      air_conditioner: true
+      unit_washer_dryer: true
+      washer_dryer_hookup: true
+      dishwasher: true
+      wheelchair_access: true
+  :pet:
+    dog: true
+    cat: true
+
+- :name:         "Good News Deli"
+  :description:  "Best sandwiches and Asian bowls in Reston, Virginia"
+  :address:      "1800 Alexander Bell Dr"
+  :city:         "Reston"
+  :state:        "VA"
+  :zip:          "20191"
+  :country:      "United States"
+  :latitude:     38.943057
+  :longitude:    -77.321264
+  :amenities:
+    community:
+      air_conditioner: true
+      unit_washer_dryer: true
+      washer_dryer_hookup: true
+      dishwasher: true
+      wheelchair_access: true
+  :pet:
+    dog: true
+    cat: true
+
+- :name:         "Westfield Montgomery"
+  :description:  "Westfield Montgomery is a shopping complex in Bethesda, Maryland."
+  :address:      "7101 Democracy Blvd"
+  :city:         "Bethesda"
+  :state:        "MD"
+  :zip:          "20817"
+  :country:      "United States"
+  :latitude:     39.025772
+  :longitude:    -77.147576
+  :amenities:
+    community:
+      air_conditioner: true
+      unit_washer_dryer: true
+      washer_dryer_hookup: true
+      dishwasher: true
+      wheelchair_access: true
+  :pet:
+    dog: true
+    cat: true
