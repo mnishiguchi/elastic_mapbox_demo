@@ -40,26 +40,42 @@ module PropertiesHelper
 
 
 
-  def city_select_tag(params)
+  # def city_select_tag(params)
+  #   select_tag(
+  #     "city",
+  #     options_for_select(Property.pluck("city").uniq, params[:city]),
+  #     include_blank: true
+  #   )
+  # end
+  #
+  # def state_select_tag(params)
+  #   select_tag(
+  #     "state",
+  #     options_for_select(Property.pluck("state").uniq, params[:state]),
+  #     include_blank: true
+  #   )
+  # end
+  #
+  # def zip_select_tag(params)
+  #   select_tag(
+  #     "zip",
+  #     options_for_select(Property.pluck("zip").uniq, params[:zip]),
+  #     include_blank: true
+  #   )
+  # end
+
+  def bedroom_count_select_tag(params)
     select_tag(
-      "city",
-      options_for_select(Property.pluck("city").uniq, params[:city]),
+      "bedroom_count",
+      options_for_select(%w(studio 1 2 3 4+), params[:bedroom_count]),
       include_blank: true
     )
   end
 
-  def state_select_tag(params)
+  def bathroom_count_select_tag(params)
     select_tag(
-      "state",
-      options_for_select(Property.pluck("state").uniq, params[:state]),
-      include_blank: true
-    )
-  end
-
-  def zip_select_tag(params)
-    select_tag(
-      "zip",
-      options_for_select(Property.pluck("zip").uniq, params[:zip]),
+      "bathroom_count",
+      options_for_select(%w(1+ 2+ 3+), params[:bathroom_count]),
       include_blank: true
     )
   end

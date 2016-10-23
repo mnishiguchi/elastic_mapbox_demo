@@ -1,30 +1,28 @@
 = form_tag properties_path, method: :get, role: "search" do |f|
   .form-group
-    = search_field_tag "q", params[:q], placeholder: "Enter search keywords...", class: "form-control"
+    = search_field_tag "q", params[:q], placeholder: "Search by location", class: "form-control"
 
   .row
     .col-sm-6
       .panel.panel-default
         .panel-heading
-          .h4 Filter by
+          .h4 Rent
         .panel-body
-          .form-group
-            label city:
-            = city_select_tag(params)
-          .form-group
-            label state:
-            = state_select_tag(params)
-          .form-group
-            label zip:
-            = zip_select_tag(params)
+          = text_field_tag "min", "", placeholder: "Min Rent"
+          = text_field_tag "max", "", placeholder: "Max Rent"
+ 
     .col-sm-6
       .panel.panel-default
         .panel-heading
-          .h4 Sort by
+          .h4 Beds and Baths
         .panel-body
           .form-group
-            = sort_attribute_select_tag(params)
-            = sort_order_select_tag(params)
+            label bedrooms:
+            = bedroom_count_select_tag(params)
+          .form-group
+            label bathrooms:
+            = bathroom_count_select_tag(params)
+            
   .row
     .col-sm-12
       .form-group

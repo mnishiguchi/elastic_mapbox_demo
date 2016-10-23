@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20161021000002) do
   create_table "floorplans", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.float    "rent"
+    t.integer  "rent"
     t.integer  "bathroom_count"
     t.integer  "bedroom_count"
     t.integer  "property_id"
