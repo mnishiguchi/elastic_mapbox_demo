@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 20161021000002) do
     t.float    "longitude"
     t.json     "amenities"
     t.json     "pet"
+    t.integer  "rent_min"
+    t.integer  "rent_max"
     t.integer  "management_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false

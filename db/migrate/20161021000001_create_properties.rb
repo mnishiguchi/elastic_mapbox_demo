@@ -13,7 +13,9 @@ class CreateProperties < ActiveRecord::Migration[5.0]
       t.float  :longitude
       t.json   :amenities
       t.json   :pet
-          
+      t.integer :rent_min
+      t.integer :rent_max
+
       t.references :management, foreign_key: true
 
       t.timestamps

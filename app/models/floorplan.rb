@@ -18,6 +18,12 @@ class Floorplan < ApplicationRecord
 
   belongs_to :property
 
+  before_save :update_property_rent_minmax
+
+
+  def update_property_rent_minmax
+    property.update_rent_minmax(self.rent)
+  end
 
   # Allows us to control what data is indexed for searching.
   # https://github.com/ankane/searchkick#indexing

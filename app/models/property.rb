@@ -13,6 +13,8 @@
 #  country       :string
 #  latitude      :float
 #  longitude     :float
+#  amenities     :json
+#  pet           :json
 #  management_id :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -48,5 +50,18 @@ class Property < ApplicationRecord
 
   def full_address
     "#{address}, #{city}, #{state} #{zip}"
+  end
+
+  # Invoked when a Floorplan is updated.
+  def update_rent_minmax(rent)
+    return if rent.nil?
+
+    if self.rent_min.nil? || rent.to_i < self.rent_min.to_i
+      update(:rent_min => rent)
+    end
+
+    if rent.to_i > self.rent_max.to_i
+      update(:rent_max => rent)
+    end
   end
 end
