@@ -15,6 +15,8 @@
 #  longitude     :float
 #  amenities     :json
 #  pet           :json
+#  rent_min      :integer
+#  rent_max      :integer
 #  management_id :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -38,11 +40,17 @@ class Property < ApplicationRecord
       city:        city,
       state:       state,
       zip:         zip,
+      rent_min:    rent_min,
+      rent_max:    rent_max,
+      amenities:   amenities,
+      pet:         pet,
     }
 
     relational = {
-      management_name:        management.name,
-      floorplan_descriptions: floorplans.map(&:description),
+      management_name:          management.name,
+      floorplan_descriptions:   floorplans.map(&:description),
+      floorplan_bedroom_count:  floorplans.map(&:bedroom_count),
+      floorplan_bathroom_count: floorplans.map(&:bathroom_count),
     }
 
     search_attributes.merge!(relational)
@@ -57,11 +65,11 @@ class Property < ApplicationRecord
     return if rent.nil?
 
     if self.rent_min.nil? || rent.to_i < self.rent_min.to_i
-      update(:rent_min => rent)
+      update(rent_min: rent)
     end
 
     if rent.to_i > self.rent_max.to_i
-      update(:rent_max => rent)
+      update(rent_max: rent)
     end
   end
 end

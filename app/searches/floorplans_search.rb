@@ -4,6 +4,17 @@ class FloorplansSearch < Search
     Floorplan
   end
 
+  def search_constraints
+    {
+      page:         options[:page],
+      per_page:     10,
+      misspellings: { below: 5 },
+      match:        :word_middle,
+      where:        where,
+      order:        order
+    }
+  end
+
   # https://github.com/ankane/searchkick#queries
   # NOTE: We add to where only the keys for which we want to filter.
   private def where

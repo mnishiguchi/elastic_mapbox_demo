@@ -7,7 +7,6 @@
         th Address
         th Management
     tbody
-      = paginate(@properties)
       - @properties.each do |property|
         tr
           td = link_to(property.name, property_path(property))

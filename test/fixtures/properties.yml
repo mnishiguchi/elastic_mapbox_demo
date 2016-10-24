@@ -15,6 +15,8 @@
 #  longitude     :float
 #  amenities     :json
 #  pet           :json
+#  rent_min      :integer
+#  rent_max      :integer
 #  management_id :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

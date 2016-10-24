@@ -3,29 +3,12 @@
 .well
   = render "result_meta"
 
-.well
-  = render "location_search"
-
 .row
   .col-sm-6
     .well
       | MAP
   .col-sm-6
-    div
-      /! Nav tabs
-      ul.nav.nav-tabs [role="tablist"]
-        li.active [role="presentation"]
-          a [aria-controls="search_form" data-toggle="tab" href="#search_form" role="tab"]
-            | Search result
-        li role="presentation"
-          a [aria-controls="search_result" data-toggle="tab" href="#search_result" role="tab"]
-            | Advanced search
-      /! Tab panes
-      .tab-content
-        #search_form.tab-pane.active [role="tabpanel"]
-          = render "search_result"
-        #search_result.tab-pane [role="tabpanel"]
-          = render "advanced_search"
+    = render "search"
 
 javascript:
   // $(document).on("turbolinks:load", function(){

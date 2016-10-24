@@ -1,0 +1,23 @@
+= form_tag properties_path, method: :get, role: "search" do |f|
+
+  .well
+    .form-inline
+      .form-group
+        = search_field_tag "q", params[:q], placeholder: "Search by location", class: "form-control"
+        = submit_tag "Search", class: "btn btn-primary"
+
+  /! Nav tabs
+  ul.nav.nav-tabs [role="tablist"]
+    li.active [role="presentation"]
+      a [aria-controls="search_form" data-toggle="tab" href="#search_form" role="tab"]
+        | Search result
+    li role="presentation"
+      a [aria-controls="search_result" data-toggle="tab" href="#search_result" role="tab"]
+        | Advanced search
+
+  /! Tab panes
+  .tab-content
+    #search_form.tab-pane.active [role="tabpanel"]
+      = render "search_result"
+    #search_result.tab-pane [role="tabpanel"]
+      = render "advanced_search"
