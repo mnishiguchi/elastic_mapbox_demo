@@ -15,7 +15,7 @@ class Search
   # - arg1:   an options hash
   def search
     # Invoke Searchkick's search method with our search constraints.
-    search_model.search(@query, constraints)
+    search_model.search(@query, search_constraints)
   end
 
   # Provides the constant of the class that we want to search on.
@@ -40,5 +40,5 @@ class Search
     order = options[:sort_order].presence || :asc
     { options[:sort_attribute] => order }
   end
-  
+
 end

@@ -5,21 +5,9 @@
 
 .row
   .col-sm-6
-    .well
-      | MAP
+    #map style=("height: 80vh; width: 100%;")
   .col-sm-6
     = render "search"
 
 javascript:
-  // $(document).on("turbolinks:load", function(){
-  //   $("#search_toggle").on("click", function(){
-  //     $("#search_form").toggle();
-  //   });
-  // });
-  // $(document).on("turbolinks:load", function(){
-  //   if ( $("#q").val() === "" ) {
-  //     $("#result_meta").hide();
-  //   } else {
-  //     $("#result_meta").show();
-  //   }
-  // });
+  window.App.maps.properties_map();

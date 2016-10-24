@@ -4,7 +4,7 @@ class FloorplansSearch < Search
     Floorplan
   end
 
-  def search_constraints
+  private def search_constraints
     {
       page:         options[:page],
       per_page:     10,

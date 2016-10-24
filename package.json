@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "babel-preset-es2015": "^6.16.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "browserify-incremental": "^3.1.1",
+    "mapbox-gl": "^0.26.0",
+    "mapbox-gl-directions": "^2.2.0",
+    "mapbox-gl-geocoder": "^1.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mnishiguchi/mapbox_demo_rails.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mnishiguchi/mapbox_demo_rails/issues"
+  },
+  "homepage": "https://github.com/mnishiguchi/mapbox_demo_rails#readme"
+}
