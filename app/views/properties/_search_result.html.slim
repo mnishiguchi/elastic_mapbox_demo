@@ -1,9 +1,3 @@
-h3.page-header#result_meta
-  = pluralize(@properties.total_count, "result")
-  | &nbsp;
-  - if @properties.respond_to?(:took)
-    small = "performed in #{took_in_seconds(@properties)} seconds"
-
 .table-responsive
   table.table.table-bordered
     thead
@@ -20,15 +14,3 @@ h3.page-header#result_meta
           td = property.description
           td = property.full_address
           td = property.management.name
-
-javascript:
-
-  $(document).on("turbolinks:load", function(){
-    if ( $("#q").val() === "" ) {
-      $("#result_meta").hide();  
-    } else {
-      $("#result_meta").show();  
-    }
-  });
-
-  

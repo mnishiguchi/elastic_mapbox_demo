@@ -1,0 +1,10 @@
+section
+  h3
+    = pluralize(@properties.total_count, "result")
+    | &nbsp;
+    - if @properties.respond_to?(:took)
+      small = "performed in #{took_in_seconds(@properties)} seconds"
+
+section
+  h4
+    | $1500 - $1800 | 1 bed * 1 bath

@@ -39,6 +39,17 @@ module PropertiesHelper
   # ---
 
 
+  def pet_friendly_check_box_tag
+    check_box_tag 'cat', "cat"
+  end
+
+  def interior_amenities_check_box_tag
+    "TODO"
+  end
+
+  def community_amenities_check_box_tag
+    "TODO"
+  end
 
   # def city_select_tag(params)
   #   select_tag(

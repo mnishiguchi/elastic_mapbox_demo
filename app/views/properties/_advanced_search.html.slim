@@ -1,0 +1,55 @@
+= form_tag properties_path, method: :get, role: "search" do |f|
+  .row
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          .h4 Rent
+        .panel-body
+          = text_field_tag "rent_min", "", placeholder: "Min Rent", class: "form-control"
+          = text_field_tag "rent_max", "", placeholder: "Max Rent", class: "form-control"
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          .h4 Beds and Baths
+        .panel-body
+          .form-group
+            label bedrooms:
+            = bedroom_count_select_tag(params)
+          .form-group
+            label bathrooms:
+            = bathroom_count_select_tag(params)
+
+  .row
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          .h4 Pet friendly
+        .panel-body
+          .form-group
+            = check_box_tag 'cat'
+            = label_tag 'cat'
+          .form-group
+            = check_box_tag 'dog'
+            = label_tag 'dog'
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          .h4 Keyword search
+        .panel-body
+          = search_field_tag "q", params[:q], placeholder: "Search by keyword", class: "form-control"
+
+  .row
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          .h4 Interior amenities
+        .panel-body
+          = render "interior_amenities_checkboxes"
+    .col-sm-6
+      .panel.panel-default
+        .panel-heading
+          .h4 Community amenities
+        .panel-body
+          = render "community_amenities_checkboxes"
+
+  = submit_tag "Search", :style => "display: none;"
