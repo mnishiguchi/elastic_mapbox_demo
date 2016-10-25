@@ -1,15 +1,17 @@
-.table-responsive
-  table.table.table-bordered
-    thead
-      tr
-        th Name
-        th description
-        th Address
-        th Management
-    tbody
-      - @properties.each do |property|
+.search_result_container [style="max-height: 65vh; overflow: auto;"]
+
+  .table-responsive
+    table.table.table-bordered
+      thead
         tr
-          td = link_to(property.name, property_path(property))
-          td = property.description
-          td = property.full_address
-          td = property.management.name
+          th Name
+          th description
+          th Address
+          th Management
+      tbody
+        - @properties.each do |property|
+          tr
+            td = link_to(property.name, property_path(property))
+            td = property.description
+            td = property.full_address
+            td = property.management.name
