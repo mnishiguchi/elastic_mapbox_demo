@@ -1,4 +1,4 @@
-= form_tag properties_path, method: :get, role: "search" do |f|
+= form_tag properties_path, method: :get, remote:true, role: "search" do |f|
 
   .well
     .form-inline
@@ -8,16 +8,17 @@
 
   /! Nav tabs
   ul.nav.nav-tabs [role="tablist"]
-    li.active [role="presentation"]
-      a [aria-controls="search_form" data-toggle="tab" href="#search_form" role="tab"]
+    li.active#search_result_tab [role="presentation"]
+      a [aria-controls="search_result" data-toggle="tab" href="#search_result_pane" role="tab"]
         | Search result
-    li role="presentation"
-      a [aria-controls="search_result" data-toggle="tab" href="#search_result" role="tab"]
+    li#advanced_search_tab [role="presentation"]
+      a [aria-controls="search_form" data-toggle="tab" href="#advanced_search_pane" role="tab"]
         | Advanced search
 
   /! Tab panes
   .tab-content
-    #search_form.tab-pane.active [role="tabpanel"]
-      = render "search_result"
-    #search_result.tab-pane [role="tabpanel"]
+    #search_result_pane.tab-pane.active [role="tabpanel"]
+      #search_result
+        = render "search_result"
+    #advanced_search_pane.tab-pane [role="tabpanel"]
       = render "advanced_search"

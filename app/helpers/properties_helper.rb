@@ -1,5 +1,41 @@
 module PropertiesHelper
 
+  def search_conditions_text(search_conditions)
+    return if search_conditions.nil?
+    # search_conditions["q"]
+    # search_conditions["rent_min"]
+    # search_conditions["rent_max"]
+    # search_conditions["bedroom_count"]
+    # search_conditions["bathroom_count"]
+
+    [].tap do |ct|
+      ct << rent_condition_text(search_conditions["rent_min"], search_conditions["rent_max"])
+      ct << room_count_condition_text(search_conditions["bedroom_count"], search_conditions["bathroom_count"])
+      ct.compact!
+      ct.insert(1, " | ") if ct.size > 1
+    end.join("")
+  end
+
+  def rent_condition_text(rent_min, rent_max)
+    if rent_min.present? && rent_max.present?
+      "$#{rent_min} to $#{rent_max}"
+    elsif rent_min.present?
+      "Min $#{rent_min}"
+    elsif rent_max.present?
+      "Max $#{rent_max}"
+    end
+  end
+
+  def room_count_condition_text(bedroom_count, bathroom_count)
+    if bedroom_count.present? && bathroom_count.present?
+      "#{pluralize(bedroom_count, "bed")} & #{pluralize(bathroom_count, "bath")}"
+    elsif bedroom_count.present?
+      pluralize(bedroom_count, "bed")
+    elsif bathroom_count.present?
+      pluralize(bathroom_count, "bath")
+    end
+  end
+
 
   # ---
   # Sorting
@@ -38,18 +74,6 @@ module PropertiesHelper
   # Filtering
   # ---
 
-
-  def pet_friendly_check_box_tag
-    check_box_tag 'cat', "cat"
-  end
-
-  def interior_amenities_check_box_tag
-    "TODO"
-  end
-
-  def community_amenities_check_box_tag
-    "TODO"
-  end
 
   # def city_select_tag(params)
   #   select_tag(

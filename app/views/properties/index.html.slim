@@ -1,7 +1,8 @@
 = provide(:title, "#{pluralize(@properties.count, "apartment")} found")
 
 .well
-  = render "result_meta"
+  #search_result_meta
+    = render "search_result_meta", search_conditions: nil
 
 .row
   .col-sm-6
