@@ -24,13 +24,3 @@ h3.page-header#result_meta
           td = floorplan.bedroom_count
           td = floorplan.bathroom_count
           td = floorplan.description
-
-javascript:
-
-  $(document).on("turbolinks:load", function(){
-    if ( $("#q").val() === "" ) {
-      $("#result_meta").hide();  
-    } else {
-      $("#result_meta").show();  
-    }
-  });

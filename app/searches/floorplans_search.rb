@@ -20,38 +20,48 @@ class FloorplansSearch < Search
   private def where
     where = {}
 
-    # rent
-    if options[:rent_min].present? && options[:rent_max].present?
-      where[:rent] = (options[:rent_min])..(options[:rent_max])
-    elsif options[:rent_min].present?
-      where[:rent] = { lte: options[:rent_min] }
-    elsif options[:rent_max].present?
-      where[:rent] = { gte: options[:rent_max] }
+    if options[:rent_min].present? || options[:rent_max].present?
+      where[:rent] = where_rent
     end
 
-    # bathroom_count
-    if options[:bathroom_count].present?
-      where[:bathroom_count] =  {
-        "1+" => { gte: 1 },
-        "2+" => { gte: 2 },
-        "3+" => { gte: 3 },
-      } [ options[:bathroom_count] ]
-    end
-
-    # bedroom_count
-    bathroom_count_options =
     if options[:bedroom_count].present?
-      where[:bedroom_count] = {
-        "studio" => 1,
-        "1"      => 1,
-        "2"      => 2,
-        "3"      => 3,
-        "4+"     => { gte: 4 },
-      } [ options[:bedroom_count] ]
+      where[:bedroom_count] = where_bedroom_count
     end
 
-    ap where
+    if options[:bathroom_count].present?
+      where[:bathroom_count] = where_bathroom_count
+    end
 
+    # ap where
     where
   end
+
+  private def where_rent
+    if options[:rent_min].present? && options[:rent_max].present?
+      (options[:rent_min])..(options[:rent_max])
+    elsif options[:rent_min].present?
+      { gte: options[:rent_min] }
+    elsif options[:rent_max].present?
+      { lte: options[:rent_max] }
+    end
+  end
+
+  private def where_bedroom_count
+    {
+      "studio" => 1,
+      "1"      => 1,
+      "2"      => 2,
+      "3"      => 3,
+      "4+"     => { gte: 4 },
+    } [ options[:bedroom_count] ]
+  end
+
+  private def where_bathroom_count
+    {
+      "1+" => { gte: 1 },
+      "2+" => { gte: 2 },
+      "3+" => { gte: 3 },
+      } [ options[:bathroom_count] ]
+  end
+
 end

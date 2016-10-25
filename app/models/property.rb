@@ -33,19 +33,6 @@ class Property < ApplicationRecord
   # https://github.com/ankane/searchkick#indexing
   # NOTE: We need to reindex after making changes to the search attributes.
   def search_data
-    search_attributes = {
-      name:        name,
-      description: description,
-      address:     address,
-      city:        city,
-      state:       state,
-      zip:         zip,
-      rent_min:    rent_min,
-      rent_max:    rent_max,
-      amenities:   amenities,
-      pet:         pet,
-    }
-
     relational = {
       management_name:          management.name,
       floorplan_descriptions:   floorplans.map(&:description),
@@ -53,7 +40,7 @@ class Property < ApplicationRecord
       floorplan_bathroom_count: floorplans.map(&:bathroom_count),
     }
 
-    search_attributes.merge!(relational)
+    attributes.merge(relational)
   end
 
   def full_address
