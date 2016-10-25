@@ -43,6 +43,10 @@ class Property < ApplicationRecord
     attributes.merge(relational)
   end
 
+  def rent_minmax_text
+    "$#{rent_min} - #{rent_max}" 
+  end
+
   def full_address
     "#{address}, #{city}, #{state} #{zip}"
   end

@@ -28,7 +28,7 @@ module PropertiesHelper
 
   def room_count_condition_text(bedroom_count, bathroom_count)
     if bedroom_count.present? && bathroom_count.present?
-      "#{pluralize(bedroom_count, "bed")} & #{pluralize(bathroom_count, "bath")}"
+      "#{pluralize(bedroom_count, "bed")} | #{pluralize(bathroom_count, "bath")}"
     elsif bedroom_count.present?
       pluralize(bedroom_count, "bed")
     elsif bathroom_count.present?

@@ -69,6 +69,18 @@ High-level
 - By default, space between words means AND.
 - By default, results must match the entire word.
 
+#### Deployment
+
+- Choose an add-on: SearchBox, Bonsai, or Elastic Cloud.
+- [https://github.com/ankane/searchkick#deployment](https://github.com/ankane/searchkick#deployment)
+
+```
+git push heroku master     # Push up to Heroku repo
+heroku pg:reset DATABASE   # reset the production database
+heroku run rake db:migrate
+heroku run rake db:seed
+heroku run rake searchkick:reindex:all
+```
 
 ---
 

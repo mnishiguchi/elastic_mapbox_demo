@@ -5,13 +5,13 @@
       thead
         tr
           th Name
-          th description
           th Address
+          th Rent
           th Management
       tbody
         - @properties.each do |property|
           tr
             td = link_to(property.name, property_path(property))
-            td = property.description
             td = property.full_address
+            td = property.rent_minmax_text
             td = property.management.name
