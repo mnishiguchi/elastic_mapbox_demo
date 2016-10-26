@@ -8,11 +8,11 @@ module PropertiesHelper
     # search_conditions["bedroom_count"]
     # search_conditions["bathroom_count"]
 
-    [].tap do |ct|
-      ct << rent_condition_text(search_conditions["rent_min"], search_conditions["rent_max"])
-      ct << room_count_condition_text(search_conditions["bedroom_count"], search_conditions["bathroom_count"])
-      ct.compact!
-      ct.insert(1, " | ") if ct.size > 1
+    [].tap do |sc_text|
+      sc_text << rent_condition_text(search_conditions["rent_min"], search_conditions["rent_max"])
+      sc_text << room_count_condition_text(search_conditions["bedroom_count"], search_conditions["bathroom_count"])
+      sc_text.compact!
+      sc_text.insert(1, " | ") if sc_text.size > 1
     end.join("")
   end
 

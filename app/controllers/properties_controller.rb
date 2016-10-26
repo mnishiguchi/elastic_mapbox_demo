@@ -14,11 +14,21 @@ class PropertiesController < ApplicationController
     }
   end
 
+  # GET /properties/autocomplete?q=washington
+  def autocomplete
+    render json: Property.search(params[:q], {
+                    fields: ["city_state^5"],
+                    limit: 10,
+                    load: false,
+                    misspellings: { below: 5 }
+                  }).map(&:city_state).uniq
+  end
+
   def show
     @property = Property.find(params[:id])
   end
 
-  def search_params
+  private def search_params
     # TODO: make a whitelist.
     params.permit!
   end
