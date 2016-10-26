@@ -3,9 +3,10 @@
   .well
     .form-inline
       .form-group
-        = search_field_tag "q", params[:q], placeholder: "Search by location",
-                                            class: "form-control"
-        = submit_tag "Search", class: "btn btn-primary"
+        .input-group
+          input.form-control [type="search" id="q" name="q" placeholde="Search by location" style="width: auto;"]
+          button.input-group-addon.form-control [type="submit" style="width: auto;"]
+            = fa_icon("search")
 
   /! Nav tabs
   ul.nav.nav-tabs [role="tablist"]
