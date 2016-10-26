@@ -1,9 +1,24 @@
-= provide(:title, "#{pluralize(@floorplans.count, "floorplan")} found")
+= provide(:title, "All floorplans")
 
-.jumbotron
-  h2 Search for floorplans
-    
-  = render "search_form"
+h2.page-header
+  | All floorplans
 
-#search_result
-  = render "search_result"
+.table-responsive
+  table.table.table-bordered
+    thead
+      tr
+        th name
+        th address
+        th rent
+        th beds
+        th baths
+        th description
+    tbody
+      - @floorplans.each do |floorplan|
+        tr
+          td = link_to(floorplan.name, floorplan_path(floorplan))
+          td = floorplan.property.full_address
+          td = floorplan.rent
+          td = floorplan.bedroom_count
+          td = floorplan.bathroom_count
+          td = floorplan.description

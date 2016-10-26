@@ -1,10 +1,7 @@
 class FloorplansController < ApplicationController
 
   def index
-    @floorplans = FloorplansSearch.new(
-                    query:   params[:q],
-                    options: search_params,
-                  ).search
+    @floorplans = Floorplan.all
   end
 
   def show

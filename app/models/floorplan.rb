@@ -19,22 +19,16 @@ class Floorplan < ApplicationRecord
   belongs_to :property
 
   before_save :update_property_rent_minmax
+  after_commit :reindex_property
 
 
   def update_property_rent_minmax
     property.update_rent_minmax(self.rent)
   end
 
-  # Allows us to control what data is indexed for searching.
-  # https://github.com/ankane/searchkick#indexing
-  # NOTE: We need to reindex after making changes to the search attributes.
-  def search_data
-    relational = {
-      property_state:  property.state,
-      property_city:   property.city,
-      property_zip:    property.zip,
-    }
-
-    attributes.merge(relational)
+  # Note that searchkick will not automatically reindex when the associated
+  # models change. You need to handle this yourself.
+  def reindex_property
+    property.reindex
   end
 end

@@ -56,6 +56,10 @@ High-level
 | column   |  field  ||
 
 
+#### Monitoring tool
+- [ElasticHQ](http://www.elastichq.org/index.html)
+
+
 ---
 
 
@@ -131,6 +135,36 @@ bundle exec rake db:seed
 
 #### Deployment
 - [How to setup elasticsearch on Heroku?](http://stackoverflow.com/a/38657992/3837223)
+
+
+---
+
+
+## TODO
+
+#### Add markers for search results on the map
+- get a list of lnglats for search result.
+- pass the lnglat list to mapbox.
+- add search result markers to map.
+
+#### update markers when map has been moved.
+- get the center lnglat when user stop moving the map.
+- geo-search with that lnglat.
+
+#### get user's current location
+- get address from ip.
+
+
+#### Some resources
+- [#Map.event:moveend](https://www.mapbox.com/mapbox-gl-js/api/#Map.event:moveend)
+- [#Map#getCenter](https://www.mapbox.com/mapbox-gl-js/api/#Map#getCenter)
+- [Set a point after Geocoder result](https://www.mapbox.com/mapbox-gl-js/example/point-from-geocoder-result/)
+- [The Ruby Toolbox - Geocoding & Maps](https://www.ruby-toolbox.com/categories/geocoding___maps)
+- [alexreisner/geocoder: Complete Ruby geocoding solution.](https://github.com/alexreisner/geocoder)
+- [searchkick#geospatial-searches](https://github.com/ankane/searchkick#geospatial-searches)
+- [Geospatial Searches with Searchkick to find users](http://stackoverflow.com/a/22331111/3837223)
+- [Rails - how to obtain visitors' IP address?](http://stackoverflow.com/questions/19317255/rails-how-to-obtain-visitors-ip-address)
+- [ankane/searchkick: personalized-results](https://github.com/ankane/searchkick#personalized-results)
 
 
 ---
