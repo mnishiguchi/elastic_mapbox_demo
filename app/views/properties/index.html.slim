@@ -1,30 +1,58 @@
 = provide(:title, "#{pluralize(@properties.count, "apartment")} found")
 
-.well
-  #search_result_meta
-    = render "search_result_meta", search_conditions: nil
+button#map_toggle.hidden-sm.hidden-md.hidden-lg
+  | Map toggle
+
+#search_result_meta
+  = render "search_result_meta", search_conditions: nil
 
 .row
   .col-sm-6
-    #map style=("height: 80vh; width: 100%;")
+    #map [style="height: 500px; width: 100%;"]
   .col-sm-6
     = render "search"
 
 javascript:
 
-  new window.App.maps.PropertiesMap([ -77.356746, 38.957575 ], [
-    {
-      lngLat: [-77.356746, 38.957575],
-      description: `
-      <h4>Property 1</h4>
-      <p style="max-width: 150px; max-height: 300px; overflow-y: auto;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      `
-    },
-    {
-      lngLat: [-77.321264, 38.943057],
-      description: `
-      <h4>Property 2</h4>
-      <p style="max-width: 150px; max-height: 300px; overflow-y: auto;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      `
+  // Pass JSON data to frontend.
+  var data = #{ raw Property.properties_json_for_map(@properties) }
+
+  // Create a map initializing with that data.
+  var map = new window.App.maps.PropertiesMap(data[0].lngLat, data).map;
+
+  // Do something when user finish moving the map.
+  map.on('moveend', () => {
+
+    // TODO: do something.
+    console.log("moveend")
+
+  })
+
+
+  //---
+  //---
+
+
+  // Toggle map.
+  $('#map_toggle').on('click', function() {
+    $('#map').toggle();
+  })
+
+scss:
+
+  #map_toggle {
+    float: right;
+    color: black;
+    &:hover {
+      color: black;
+      text-decoration: none;
     }
-  ]);
+    .flex & {
+      margin-right: auto;
+    }
+  }
+  .mapboxgl-popup {
+    max-width: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+  }

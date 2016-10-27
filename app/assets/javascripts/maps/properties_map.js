@@ -70,7 +70,7 @@ class PropertiesMap {
       container: 'map',
       style    : 'mapbox://styles/mapbox/light-v9',
       center   : initialCenterLngLat,
-      zoom     : 12
+      zoom     : 10
     });
   }
 

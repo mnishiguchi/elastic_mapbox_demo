@@ -7,13 +7,21 @@
   :country:      "United States"
   :longitude:    -77.036545
   :latitude:     38.897096
-  
+
 - :name:         "Washington Post"
-  :description:  "The Washington Post is an American daily newspaper. It is the most widely circulated newspaper published in Washington, D.C., and was founded on December 6, 1877,[7] making it the area's oldest extant newspaper."
-  :address:      "1301 K St NW,"
+  :description:  "The Washington Post is an American daily newspaper. It is the most widely circulated newspaper published in Washington, D.C., and was founded on December 6, 1877, making it the area's oldest extant newspaper."
+  :address:      "1301 K St NW"
   :city:         "Washington"
   :state:        "DC"
   :zip:          "20071"
+  :country:      "United States"
+
+- :name:         "Cava Grill"
+  :description:  "Casual Greek chain offering customizable pita & bowl dishes amid industrial-style decor."
+  :address:      "707 H St NW"
+  :city:         "Washington"
+  :state:        "DC"
+  :zip:          "20001"
   :country:      "United States"
 
 - :name:         "South Lakes Village Shopping Center"
@@ -54,4 +62,20 @@
   :city:         "Washington"
   :state:        "DC"
   :zip:          "20009"
+  :country:      "United States"
+
+- :name:         "Reston Town Center"
+  :description:  "European-style outdoor mall with shops, restaurants, a multiplex & a pavilion for seasonal events."
+  :address:      "11900 Market St"
+  :city:         "Reston"
+  :state:        "VA"
+  :zip:          "20190"
+  :country:      "United States"
+
+- :name:         "The Spectrum"
+  :description:  "It's just a small strip mall with a fancy name."
+  :address:      "11846 Spectrum Center"
+  :city:         "Reston"
+  :state:        "VA"
+  :zip:          "20190"
   :country:      "United States"

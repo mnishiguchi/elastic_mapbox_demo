@@ -56,6 +56,29 @@ class Property < ApplicationRecord
     "#{address}, #{city}, #{state} #{zip}"
   end
 
+  def lng_lat
+    [ longitude, latitude ]
+  end
+
+  # Prepares json data that can be used for creating a Map.
+  def self.properties_json_for_map(properties)
+    # Obtain lists of attributes.
+    name_list        = properties.map(&:name)
+    description_list = properties.map(&:description)
+    lng_lat_list     = properties.map(&:lng_lat)
+
+    map_hash = []
+    name_list.zip(description_list, lng_lat_list).each do |attrs|
+      map_hash << {
+        "name"        => attrs[0],
+        "description" => attrs[1],
+        "lngLat"      => attrs[2]
+      }
+    end
+
+    map_hash.to_json
+  end
+
   # Invoked when a Floorplan is updated.
   def update_rent_minmax(rent)
     return if rent.nil?

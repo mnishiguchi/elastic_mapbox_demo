@@ -1,10 +1,10 @@
-section
+section [style="display:inline-block;"]
   h3
     = pluralize(@properties.total_count, "result")
     | &nbsp;
     - if @properties.respond_to?(:took)
       small = "performed in #{took_in_seconds(@properties)} seconds"
 
-#search_conditions_text
-  h4
-    = search_conditions_text(search_conditions)
+  #search_conditions_text
+    h4
+      = search_conditions_text(search_conditions)
