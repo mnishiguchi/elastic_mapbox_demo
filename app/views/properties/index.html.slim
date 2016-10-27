@@ -11,4 +11,20 @@
     = render "search"
 
 javascript:
-  window.App.maps.propertiesMap();
+
+  new window.App.maps.PropertiesMap([ -77.356746, 38.957575 ], [
+    {
+      lngLat: [-77.356746, 38.957575],
+      description: `
+      <h4>Property 1</h4>
+      <p style="max-width: 150px; max-height: 300px; overflow-y: auto;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      `
+    },
+    {
+      lngLat: [-77.321264, 38.943057],
+      description: `
+      <h4>Property 2</h4>
+      <p style="max-width: 150px; max-height: 300px; overflow-y: auto;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      `
+    }
+  ]);

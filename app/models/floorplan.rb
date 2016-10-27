@@ -14,7 +14,6 @@
 #
 
 class Floorplan < ApplicationRecord
-  searchkick
 
   belongs_to :property
 
