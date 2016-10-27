@@ -5,58 +5,24 @@
   :state:        "DC"
   :zip:          "20500"
   :country:      "United States"
-  :latitude:     38.897676
-  :longitude:    -77.036529
-  :amenities:
-    community:
-      air_conditioner: true
-      unit_washer_dryer: true
-      washer_dryer_hookup: true
-      dishwasher: true
-      wheelchair_access: true
-  :pet:
-    dog: true
-    cat: true
-
-- :name:         "White Castle"
-  :description:  "White Castle is an American regional hamburger restaurant chain in the Midwestern and Mid-Atlantic United States, generally credited as the first fast-food chain in the United States."
-  :address:      "1514 Connecticut Ave NW"
+  :longitude:    -77.036545
+  :latitude:     38.897096
+  
+- :name:         "Washington Post"
+  :description:  "The Washington Post is an American daily newspaper. It is the most widely circulated newspaper published in Washington, D.C., and was founded on December 6, 1877,[7] making it the area's oldest extant newspaper."
+  :address:      "1301 K St NW,"
   :city:         "Washington"
   :state:        "DC"
-  :zip:          "22036"
+  :zip:          "20071"
   :country:      "United States"
-  :latitude:     38.934085
-  :longitude:    -77.057641
-  :amenities:
-    community:
-      air_conditioner: true
-      unit_washer_dryer: true
-      washer_dryer_hookup: true
-      dishwasher: true
-      wheelchair_access: true
-  :pet:
-    dog: true
-    cat: true
 
-- :name:         "White Temple"
-  :description:  "A temple (from the Latin word templum) is a structure reserved for religious or spiritual rituals and activities such as prayer and sacrifice."
-  :address:      " 6500 Lakehaven Ln"
-  :city:         "Fairfax Station"
+- :name:         "South Lakes Village Shopping Center"
+  :description:  "Outdoor shopping plaza featuring a modest selection of eateries & stores, including a supermarket."
+  :address:      "11160 South Lakes Dr"
+  :city:         "Reston"
   :state:        "VA"
-  :zip:          "22039"
+  :zip:          "20191"
   :country:      "United States"
-  :latitude:     38.773840
-  :longitude:    -77.300721
-  :amenities:
-    community:
-      air_conditioner: true
-      unit_washer_dryer: true
-      washer_dryer_hookup: true
-      dishwasher: true
-      wheelchair_access: true
-  :pet:
-    dog: true
-    cat: true
 
 - :name:         "Dulles Town Center"
   :description:  "The Dulles Town Center is a two-level enclosed shopping mall in Sterling, Loudoun County, Virginia, United States, located five miles north of the Washington Dulles International Airport."
@@ -65,18 +31,6 @@
   :state:        "VA"
   :zip:          "20166"
   :country:      "United States"
-  :latitude:     39.024243
-  :longitude:    -77.415367
-  :amenities:
-    community:
-      air_conditioner: true
-      unit_washer_dryer: true
-      washer_dryer_hookup: true
-      dishwasher: true
-      wheelchair_access: true
-  :pet:
-    dog: true
-    cat: true
 
 - :name:         "Good News Deli"
   :description:  "Best sandwiches and Asian bowls in Reston, Virginia"
@@ -85,18 +39,6 @@
   :state:        "VA"
   :zip:          "20191"
   :country:      "United States"
-  :latitude:     38.943057
-  :longitude:    -77.321264
-  :amenities:
-    community:
-      air_conditioner: true
-      unit_washer_dryer: true
-      washer_dryer_hookup: true
-      dishwasher: true
-      wheelchair_access: true
-  :pet:
-    dog: true
-    cat: true
 
 - :name:         "Westfield Montgomery"
   :description:  "Westfield Montgomery is a shopping complex in Bethesda, Maryland."
@@ -105,15 +47,11 @@
   :state:        "MD"
   :zip:          "20817"
   :country:      "United States"
-  :latitude:     39.025772
-  :longitude:    -77.147576
-  :amenities:
-    community:
-      air_conditioner: true
-      unit_washer_dryer: true
-      washer_dryer_hookup: true
-      dishwasher: true
-      wheelchair_access: true
-  :pet:
-    dog: true
-    cat: true
+
+- :name:         "Starbucks on Columbia Rd"
+  :description:  "Seattle-based coffeehouse chain known for its signature roasts, light bites and WiFi availability."
+  :address:      "1801 Columbia Rd NW"
+  :city:         "Washington"
+  :state:        "DC"
+  :zip:          "20009"
+  :country:      "United States"

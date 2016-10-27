@@ -23,11 +23,16 @@
 #
 
 class Property < ApplicationRecord
+
   searchkick
 
   belongs_to :management
   has_many :floorplans
 
+  # Convert full address to lnglat automatically.
+  # https://github.com/alexreisner/geocoder
+  geocoded_by :full_address   # can also be an IP address
+  after_validation :geocode   # auto-fetch coordinates
 
   # Allows us to control what data is indexed for searching.
   # https://github.com/ankane/searchkick#indexing
@@ -35,9 +40,9 @@ class Property < ApplicationRecord
   def search_data
     merge = {
       city_state:               "#{city}, #{state}",
-      management_name:          management.name,
-      floorplan_bedroom_count:  floorplans.map(&:bedroom_count),
-      floorplan_bathroom_count: floorplans.map(&:bathroom_count),
+      management_name:          management&.name,
+      floorplan_bedroom_count:  floorplans&.map(&:bedroom_count),
+      floorplan_bathroom_count: floorplans&.map(&:bathroom_count),
     }
 
     attributes.merge(merge)
