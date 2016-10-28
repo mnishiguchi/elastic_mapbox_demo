@@ -112,36 +112,23 @@ class PropertiesMap {
 
     let markerPoints = [];
     for (let property of properties) {
-      let marker = this.markerPoint(property.lngLat, property.description);
-      markerPoints.push(marker);
-    }
-
-    return markerPoints;
-  }
-
-
-  /**
-   * Creates a marker point for the specified lngLat with its description.
-   * @param  {Array<Float>} lngLat
-   * @param  {String} description
-   * @return {Object}
-   */
-  markerPoint(lngLat, description) {
-      console.log(`markerPoint: ${lngLat} | ${description}`);
-
-      return {
+      markerPoints.push({
           "type": "Feature",
           "properties": {
-              "description": description,
+              "description": property.description,
               "iconSize"   : [20, 20],
               "icon"       : "circle"
           },
           "geometry": {
               "type"       : "Point",
-              "coordinates": lngLat
+              "coordinates": property.lngLat
           }
-      }
+      });
+    }
+
+    return markerPoints;
   }
+
 } // endclass
 
 

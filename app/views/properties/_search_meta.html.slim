@@ -1,0 +1,5 @@
+.navbar-text
+  .px-2= pluralize(@properties.total_count, "result")
+  .px-2= search_conditions_text(search_conditions)
+  - if @properties.respond_to?(:took)
+    small.px-2= "performed in #{took_in_seconds(@properties)} seconds"

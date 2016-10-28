@@ -13,7 +13,7 @@ gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-ra
 gem 'searchkick'
 
 gem 'awesome_print'
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
 gem 'browserify-rails'
 gem 'coffee-rails', '~> 4.2'
 gem 'faker'

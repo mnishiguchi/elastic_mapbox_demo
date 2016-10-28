@@ -6,8 +6,8 @@ $('#search_result').html(
   '<%= j(render "search_result", collection: @floorplans) %>'
 );
 
-$('#search_result_meta').html(
-  '<%= j(render "search_result_meta", collection: @floorplans, search_conditions: @search_conditions) %>'
+$('#search_meta').html(
+  '<%= j(render "search_meta", collection: @floorplans, search_conditions: @search_conditions) %>'
 );
 
 // Update the active tab.

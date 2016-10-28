@@ -1,0 +1,31 @@
+.card
+  ul.list-group.list-group-flush
+    li.list-group-item 
+      .h4 Rent
+      .row
+        .col-sm-6
+          .input-group
+            .input-group-addon $
+            = text_field_tag "rent_min", "", placeholder: "Min", class: "form-control"
+        .col-sm-6
+          .input-group
+            .input-group-addon $
+            = text_field_tag "rent_max", "", placeholder: "Max", class: "form-control"
+    li.list-group-item 
+      .h4 Beds and Baths
+      .row
+        .col-sm-6
+          label bedrooms:
+          = bedroom_count_select_tag(params)
+        .col-sm-6
+          label bathrooms:
+          = bathroom_count_select_tag(params)
+    li.list-group-item 
+      .h4 Pet friendly
+      .row
+        .col-sm-6
+          = check_box_tag 'cat'
+          = label_tag 'cat'
+        .col-sm-6
+          = check_box_tag 'dog'
+          = label_tag 'dog'

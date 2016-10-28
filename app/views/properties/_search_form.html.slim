@@ -1,0 +1,22 @@
+= form_tag properties_path, method: :get, remote:true, class: "form-inline" do |f|
+
+  input.form-control [type="search" id="q" name="q" placeholder="Search by location" style="width: auto;"]
+  
+  button.btn.btn-outline-success [type="submit" style="width: auto;"]
+    = fa_icon("search")
+    
+  /! Button trigger modal
+  button.btn.btn-outline-secondary [type="button" data-target="#advancedSearch" data-toggle="modal"]
+    = fa_icon("sliders")
+
+  /! Modal
+  #advancedSearch.modal.fade aria-hidden="true" aria-labelledby="advancedSearchLabel" role="dialog" tabindex="-1" 
+    .modal-dialog role="document" 
+      .modal-content
+        .modal-body
+          = render "advanced_search_fields"
+        .modal-footer
+          button.btn.btn-secondary#advanced_search_close [data-dismiss="modal" type="button"]
+            = fa_icon("times")
+          button.btn.btn-outline-success#advanced_search_submit [type="submit" style="width: auto;"]
+            = fa_icon("search")

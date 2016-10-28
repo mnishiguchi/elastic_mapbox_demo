@@ -1,26 +1,12 @@
-= form_tag properties_path, method: :get, remote:true, role: "search" do |f|
-
-  .well
-    .form-inline
-      .form-group
-        .input-group
-          input.form-control [type="search" id="q" name="q" placeholde="Search by location" style="width: auto;"]
-          button.input-group-addon.form-control [type="submit" style="width: auto;"]
-            = fa_icon("search")
-
-  /! Nav tabs
-  ul.nav.nav-tabs [role="tablist"]
-    li.active#search_result_tab [role="presentation"]
-      a [aria-controls="search_result" data-toggle="tab" href="#search_result_pane" role="tab"]
-        | Search result
-    li#advanced_search_tab [role="presentation"]
-      a [aria-controls="search_form" data-toggle="tab" href="#advanced_search_pane" role="tab"]
-        | Advanced search
-
-  /! Tab panes
-  .tab-content
-    #search_result_pane.tab-pane.active [role="tabpanel"]
-      #search_result
-        = render "search_result"
-    #advanced_search_pane.tab-pane [role="tabpanel"]
-      = render "advanced_search"
+nav.navbar.navbar-light
+  #search_form.float-xs-left
+    = render "search_form"
+    
+  #search_meta.float-xs-left
+    = render "search_meta", search_conditions: nil
+    
+  button.btn.btn-outline-secondary.float-xs-right#map_toggle [type="button"]
+    = fa_icon("map-o")
+    
+  button.btn.btn-outline-secondary.float-xs-right#search_result_toggle [type="button"]
+    = fa_icon("list")

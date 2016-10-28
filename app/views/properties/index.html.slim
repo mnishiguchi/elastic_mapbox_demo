@@ -1,19 +1,22 @@
 = provide(:title, "#{pluralize(@properties.count, "apartment")} found")
 
-button#map_toggle.hidden-sm.hidden-md.hidden-lg
-  | Map toggle
+= render "search"
 
-#search_result_meta
-  = render "search_result_meta", search_conditions: nil
+#map [style="position: absolute; height: 100%; width: 100%;"]
 
-.row
-  .col-sm-6
-    #map [style="height: 500px; width: 100%;"]
-  .col-sm-6
-    = render "search"
+#search_result 
+  = render "search_result"
+
+
+css:
+  .mapboxgl-popup {
+    max-width: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
 
 javascript:
-
   // Pass JSON data to frontend.
   var data = #{ raw Property.properties_json_for_map(@properties) }
 
@@ -35,24 +38,16 @@ javascript:
 
   // Toggle map.
   $('#map_toggle').on('click', function() {
-    $('#map').toggle();
+    $('#map').show();
+    $('#search_result').hide();
   })
-
-scss:
-
-  #map_toggle {
-    float: right;
-    color: black;
-    &:hover {
-      color: black;
-      text-decoration: none;
-    }
-    .flex & {
-      margin-right: auto;
-    }
-  }
-  .mapboxgl-popup {
-    max-width: 150px;
-    max-height: 300px;
-    overflow-y: auto;
-  }
+  // Toggle search_result.
+  $('#search_result_toggle').on('click', function() {
+    $('#search_result').show();
+    $('#map').hide();
+  })
+  
+  // Close modal when clicking on submit.
+  $('#advanced_search_submit').on('click', function() {
+    $('#advanced_search_close').trigger("click");
+  })
