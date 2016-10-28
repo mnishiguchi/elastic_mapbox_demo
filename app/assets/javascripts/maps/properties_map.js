@@ -20,41 +20,65 @@
 class PropertiesMap {
 
   constructor(lngLat, properties) {
-    console.log('hello from properties_map.js');
+    console.log('instantiating PropertiesMap');
 
-    this.map      = this.createMap(lngLat);
-    this.features = this.markerPoints(properties);
+    this.sourceId = "properties"
+    this.map      = this._createMap(lngLat);
+    this.markers  = this._createMarkers(properties);
 
-    this.setup();
+    this._setupEventListeners();
   }
 
 
-  setup() {
+  /**
+   * Updates the markers on the map based on the specified properties json array.
+   */
+  updateMarkers(properties) {
+    this.map.removeSource(this.sourceId);
+    this.markers = this._createMarkers(properties);
+    this._addMarkersOnMap();
+  }
+
+
+  // ---
+  // PRIVATE METHODS
+  // ---
+
+
+  _setupEventListeners() {
     // Wait until the map is loaded.
     // Set up initial behavior of the map.
     this.map.on('load', () => {
-      this.addMarkersPointsOnMap();
+      this._addMarkersOnMap();
     });
 
     // Show popup on click.
     this.map.on('click', (event) => {
 
-      const features = this.map.queryRenderedFeatures(event.point, {
+      const markers = this.map.queryRenderedFeatures(event.point, {
           layers: ['properties']
       });
 
-      if (!features.length) {
+      if (!markers.length) {
           return;
       }
 
       // Populate the popup and set its coordinates
       // based on the feature found.
       new mapboxgl.Popup()
-          .setLngLat(features[0].geometry.coordinates)
-          .setHTML(features[0].properties.description)
+          .setLngLat(markers[0].geometry.coordinates)
+          .setHTML(markers[0].properties.description)
           .addTo(this.map);
     });
-  } // end setup
+
+    // Do something when user finish moving the map.
+    this.map.on('moveend', () => {
+
+      // TODO: do something.
+      console.log("moveend: ", this.map.getCenter())
+
+    });
+  } // end _setupEventListeners
 
 
   /**
@@ -62,8 +86,8 @@ class PropertiesMap {
    * @param  {Array<Float>} initialCenterLngLat
    * @return {mapboxgl.Map} reference to the map object.
    */
-  createMap(initialCenterLngLat) {
-    console.log('createMap');
+  _createMap(initialCenterLngLat) {
+    console.log('_createMap');
 
     // Create a map instance based on the specified initialCenterLngLat.
     return new window.mapboxgl.Map({
@@ -79,19 +103,19 @@ class PropertiesMap {
    * @param {mapboxgl.Map} map
    * @param {Array<Object>} an array of markerpoint hashes
    */
-  addMarkersPointsOnMap(markerPoints) {
+  _addMarkersOnMap() {
     // Add a GeoJSON source containing place coordinates and information.
-    this.map.addSource("properties", {
+    this.map.addSource(this.sourceId, {
         "type": "geojson",
         "data": {
             "type"    : "FeatureCollection",
-            "features": this.features
+            "features": this.markers
         }
     });
 
     // Add a layer showing the places based on the specified source.
     this.map.addLayer({
-        "id"    : "properties",
+        "id"    : this.sourceId,
         "type"  : "symbol",
         "source": "properties",
         "layout": {
@@ -107,12 +131,12 @@ class PropertiesMap {
    * @param  {Array<Object>} properties an array of hashes with keys lngLat and description.
    * @return {Array<Object>} an array of markerpoint hashes
    */
-  markerPoints(properties) {
-    console.log(`markerPoints`)
+  _createMarkers(properties) {
+    console.log(`_createMarkers`)
 
-    let markerPoints = [];
+    let markers = [];
     for (let property of properties) {
-      markerPoints.push({
+      markers.push({
           "type": "Feature",
           "properties": {
               "description": property.description,
@@ -125,8 +149,9 @@ class PropertiesMap {
           }
       });
     }
+    console.log(`  created markers: ${markers}`);
 
-    return markerPoints;
+    return markers;
   }
 
 } // endclass

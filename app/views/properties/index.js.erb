@@ -10,8 +10,6 @@ $('#search_meta').html(
   '<%= j(render "search_meta", collection: @floorplans, search_conditions: @search_conditions) %>'
 );
 
-// Update the active tab.
-$('#search_result_tab').addClass( "active" );
-$('#search_result_pane').addClass( "active" );
-$('#advanced_search_tab').removeClass( "active" );
-$('#advanced_search_pane').removeClass( "active" );
+// Update the markers passing JSON data to frontend.
+var properties = <%= raw Property.properties_json_for_map(@properties) %>
+window.App.currentMap.updateMarkers(properties);

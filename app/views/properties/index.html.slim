@@ -4,7 +4,7 @@
 
 #map [style="position: absolute; height: 100%; width: 100%;"]
 
-#search_result 
+#search_result
   = render "search_result"
 
 
@@ -18,18 +18,10 @@ css:
 
 javascript:
   // Pass JSON data to frontend.
-  var data = #{ raw Property.properties_json_for_map(@properties) }
+  var properties = #{ raw Property.properties_json_for_map(@properties) }
 
   // Create a map initializing with that data.
-  var map = new window.App.maps.PropertiesMap(data[0].lngLat, data).map;
-
-  // Do something when user finish moving the map.
-  map.on('moveend', () => {
-
-    // TODO: do something.
-    console.log("moveend")
-
-  })
+  window.App.currentMap = new window.App.maps.PropertiesMap(properties[0].lngLat, properties);
 
 
   //---
@@ -46,7 +38,7 @@ javascript:
     $('#search_result').show();
     $('#map').hide();
   })
-  
+
   // Close modal when clicking on submit.
   $('#advanced_search_submit').on('click', function() {
     $('#advanced_search_close').trigger("click");
