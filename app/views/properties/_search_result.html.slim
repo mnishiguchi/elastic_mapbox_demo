@@ -1,17 +1,11 @@
-.search_result_container [style="max-height: 65vh; overflow: auto;"]
-
-  .table-responsive
-    table.table.table-bordered
-      thead
-        tr
-          th Name
-          th Address
-          th Rent
-          th Management
-      tbody
-        - @properties.each do |property|
-          tr
-            td = link_to(property.name, property_path(property))
-            td = property.full_address
-            td = property.rent_minmax_text
-            td = property.management.name
+/ http://v4-alpha.getbootstrap.com/components/card/
+.card-columns
+  - @properties.each do |property|
+    .card
+      img.card-img-top [alt="logo" src="http://mnishiguchi.com/images/logo_200.png"] /
+      .card-block
+        h4.card-title = link_to(property.name, property_path(property))
+        p.card-text = property.full_address
+        p.card-text = property.rent_minmax_text
+        p.card-text
+          small.muted = property.management.name

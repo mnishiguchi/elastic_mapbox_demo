@@ -1,12 +1,13 @@
 nav.navbar.navbar-light
-  #search_form.float-xs-left
-    = render "search_form"
-    
-  #search_meta.float-xs-left
-    = render "search_meta", search_conditions: nil
-    
-  button.btn.btn-outline-secondary.float-xs-right#map_toggle [type="button"]
-    = fa_icon("map-o")
-    
-  button.btn.btn-outline-secondary.float-xs-right#search_result_toggle [type="button"]
-    = fa_icon("list")
+  .row
+    .col-sm-7
+      #search_form
+        = render "search_form"
+      #search_meta
+        = render "search_meta", search_conditions: nil
+    .col-sm-5
+      .btn-group
+        button.btn.btn-outline-secondary#map_toggle [type="button"]
+          = fa_icon("map-o")  
+        button.btn.btn-outline-secondary#search_result_toggle [type="button"]
+          = fa_icon("list")

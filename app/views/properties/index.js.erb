@@ -12,4 +12,4 @@ $('#search_meta').html(
 
 // Update the markers passing JSON data to frontend.
 var properties = <%= raw Property.properties_json_for_map(@properties) %>
-window.App.currentMap.updateMarkers(properties);
+window.App.maps.currentMap.updateMarkers(properties);

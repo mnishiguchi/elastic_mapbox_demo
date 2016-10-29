@@ -1,5 +1,11 @@
-.navbar-text
-  .px-2= pluralize(@properties.total_count, "result")
-  .px-2= search_conditions_text(search_conditions)
+.navbar-text.search_meta
+  span = pluralize(@properties.total_count, "result")
+  span = search_conditions_text(search_conditions)
   - if @properties.respond_to?(:took)
-    small.px-2= "performed in #{took_in_seconds(@properties)} seconds"
+    span = "performed in #{took_in_seconds(@properties)} seconds"
+
+css: 
+  .search_meta > span {
+    padding: 0 3px;
+    font-size: .8rem;
+  }

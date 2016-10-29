@@ -1,18 +1,45 @@
 = provide(:title, "#{pluralize(@properties.count, "apartment")} found")
 
-= render "search"
+.properties_index
+  .properties_index__header
+    = render "search"
 
-#map [style="position: absolute; height: 100%; width: 100%;"]
+  .properties_index__content
+    #map.map
+    #search_result.search_result
+      = render "search_result"
 
-#search_result
-  = render "search_result"
-
-
-css:
-  .mapboxgl-popup {
-    max-width: 150px;
-    max-height: 300px;
-    overflow-y: auto;
+scss:
+  
+  .properties_index {
+    .mapboxgl-popup {
+      max-width: 150px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    
+    .btn.btn-outline-secondary {
+      color: #666;
+    }
+  }
+  
+  .properties_index__content {
+    position: absolute;
+    height: 100%; 
+    width: 100%;
+    .map {
+      position: absolute; 
+      height: 100%; 
+      width: 100%;
+    }
+    .search_result {
+      position: absolute;
+      height: 100%; 
+      width: 100%;
+      max-height: 100vh; 
+      overflow-y: auto;
+      padding: 0.5rem 1rem;
+    }
   }
 
 
@@ -21,7 +48,7 @@ javascript:
   var properties = #{ raw Property.properties_json_for_map(@properties) }
 
   // Create a map initializing with that data.
-  window.App.currentMap = new window.App.maps.PropertiesMap(properties[0].lngLat, properties);
+  window.App.maps.currentMap = new window.App.maps.PropertiesMap(properties[0].lngLat, properties);
 
 
   //---
@@ -33,10 +60,10 @@ javascript:
     $('#map').show();
     $('#search_result').hide();
   })
+  
   // Toggle search_result.
   $('#search_result_toggle').on('click', function() {
     $('#search_result').show();
-    $('#map').hide();
   })
 
   // Close modal when clicking on submit.
