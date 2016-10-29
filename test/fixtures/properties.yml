@@ -2,24 +2,25 @@
 #
 # Table name: properties
 #
-#  id            :integer          not null, primary key
-#  name          :string
-#  description   :text
-#  address       :string
-#  city          :string
-#  county        :string
-#  state         :string
-#  zip           :string
-#  country       :string
-#  latitude      :float
-#  longitude     :float
-#  amenities     :json
-#  pet           :json
-#  rent_min      :integer
-#  rent_max      :integer
-#  management_id :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id                :integer          not null, primary key
+#  name              :string
+#  description       :text
+#  formatted_address :string
+#  address           :string
+#  city              :string
+#  county            :string
+#  state             :string
+#  zip               :string
+#  country           :string
+#  latitude          :float
+#  longitude         :float
+#  amenities         :json
+#  pet               :json
+#  rent_min          :integer
+#  rent_max          :integer
+#  management_id     :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

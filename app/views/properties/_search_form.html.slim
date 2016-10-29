@@ -15,13 +15,13 @@
       /! Button trigger modal
       button.btn.btn-outline-secondary [
         type="button" 
-        data-target="#advancedSearch" 
+        data-target="#advanced_search" 
         data-toggle="modal"
       ]
         = fa_icon("sliders")
 
   /! Modal
-  #advancedSearch.modal.fade [
+  #advanced_search.modal.fade [
     aria-hidden="true" 
     aria-labelledby="advancedSearchLabel" 
     role="dialog" 
@@ -32,10 +32,11 @@
         .modal-body
           = render "advanced_search_fields"
         .modal-footer
-          button.btn.btn-secondary#advanced_search_close [
-            data-dismiss="modal" 
-            type="button"
-          ]
-            = fa_icon("times")
-          button.btn.btn-outline-success#advanced_search_submit [type="submit"]
-            = fa_icon("search")
+          .btn-group
+            button.btn.btn-secondary#advanced_search_close [
+              data-dismiss="modal" 
+              type="button"
+            ]
+              = fa_icon("times")
+            button.btn.btn-outline-success#advanced_search_submit [type="submit"]
+              = fa_icon("search")

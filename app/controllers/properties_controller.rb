@@ -11,6 +11,8 @@ class PropertiesController < ApplicationController
     @center_lng_lat = begin
       lngs = @properties.pluck(:longitude)
       lats = @properties.pluck(:latitude)
+      return nil if lngs.empty? || lats.empty?
+
       [
         lngs.reduce(:+) / lngs.size,
         lats.reduce(:+) / lats.size,

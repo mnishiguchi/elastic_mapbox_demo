@@ -1,16 +1,12 @@
 .card
-  ul.list-group.list-group-flush
+  ul.list-group
     li.list-group-item 
       .h4 Rent
       .row
         .col-sm-6
-          .input-group
-            .input-group-addon $
-            = text_field_tag "rent_min", "", placeholder: "Min", class: "form-control"
+          = text_field_tag "rent_min", "", placeholder: "Min", class: "form-control"
         .col-sm-6
-          .input-group
-            .input-group-addon $
-            = text_field_tag "rent_max", "", placeholder: "Max", class: "form-control"
+          = text_field_tag "rent_max", "", placeholder: "Max", class: "form-control"
     li.list-group-item 
       .h4 Beds and Baths
       .row

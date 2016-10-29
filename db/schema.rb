@@ -36,10 +36,12 @@ ActiveRecord::Schema.define(version: 20161021000002) do
   create_table "properties", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
+    t.string   "formatted_address"
     t.string   "address"
     t.string   "city"
     t.string   "county"
     t.string   "state"
+    t.string   "state_code"
     t.string   "zip"
     t.string   "country"
     t.float    "latitude"
@@ -49,8 +51,8 @@ ActiveRecord::Schema.define(version: 20161021000002) do
     t.integer  "rent_min"
     t.integer  "rent_max"
     t.integer  "management_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.index ["management_id"], name: "index_properties_on_management_id", using: :btree
   end
 
