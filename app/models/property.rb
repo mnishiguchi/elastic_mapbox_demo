@@ -25,9 +25,7 @@
 
 class Property < ApplicationRecord
 
-  searchkick(
-    fields: [ "formatted_address^10", "city" ]
-  )
+  searchkick
 
   belongs_to :management
   has_many :floorplans
@@ -41,11 +39,16 @@ class Property < ApplicationRecord
   # https://github.com/ankane/searchkick#indexing
   # NOTE: We need to reindex after making changes to the search attributes.
   def search_data
+    slice = [
+      :state,
+      :city,
+      :formatted_address,
+    ]
     merge = {
       floorplan_bedroom_count:  floorplans&.map(&:bedroom_count).uniq.sort,
       floorplan_bathroom_count: floorplans&.map(&:bathroom_count).uniq.sort,
     }
-    attributes.merge(merge)
+    attributes.symbolize_keys.slice(*slice).merge(merge)
   end
 
   def rent_minmax_text
@@ -57,7 +60,7 @@ class Property < ApplicationRecord
   end
 
   # Prepares json data that can be used for creating a Map.
-  def self.properties_json_for_map(properties)
+  def self.json_for_map(properties)
     # Obtain lists of attributes.
     name_list        = properties.map(&:name)
     description_list = properties.map(&:description)
@@ -67,12 +70,25 @@ class Property < ApplicationRecord
     name_list.zip(description_list, lng_lat_list).each do |attrs|
       map_hash << {
         "name"        => attrs[0],
-        "description" => attrs[1],
+        "description" => self.description_html(
+                           title:    attrs[0],
+                           body:     attrs[1],
+                           link_url: "#"
+                         ),
         "lngLat"      => attrs[2]
       }
     end
 
     map_hash.to_json
+  end
+
+  # Generate an HTML for a map marker popup.
+  def self.description_html(title:, body:, link_url:)
+    <<-HTML
+      <h6>#{title}</h6>
+      <p>#{body}</p>
+      <a href=#{link_url}>link</a>
+    HTML
   end
 
   # Invoked when a Floorplan is updated.
@@ -86,6 +102,17 @@ class Property < ApplicationRecord
     if rent.to_i > self.rent_max.to_i
       update(rent_max: rent)
     end
+  end
+
+  def self.center_lng_lat(properties)
+    lngs = properties.pluck(:longitude)
+    lats = properties.pluck(:latitude)
+    return nil if lngs.empty? || lats.empty?
+
+    [
+      lngs.reduce(:+) / lngs.size,
+      lats.reduce(:+) / lats.size,
+    ]
   end
 
   private def full_address

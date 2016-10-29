@@ -5,14 +5,14 @@
 //     lngLat: [-77.356746, 38.957575],
 //     description: `
 //     <h4>Property 1</h4>
-//     <p style="max-width: 150px; max-height: 300px; overflow-y: auto;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+//     <p">Lorem ipsum.</p>
 //     `
 //   },
 //   {
 //     lngLat: [-77.321264, 38.943057],
 //     description: `
 //     <h4>Property 2</h4>
-//     <p style="max-width: 150px; max-height: 300px; overflow-y: auto;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+//     <p">Lorem ipsum .</p>
 //     `
 //   }
 // ]
@@ -22,9 +22,9 @@ class PropertiesMap {
   constructor(lngLat, properties) {
     console.log('instantiating PropertiesMap');
 
-    this.sourceId = "properties"
-    this.map      = this._createMap(lngLat);
-    this.markers  = this._createMarkers(properties);
+    this.sourceId    = "properties"
+    this.mapboxglMap = this._createMap(lngLat);
+    this.markers     = this._createMarkers(properties);
 
     this._setupEventListeners();
   }
@@ -33,10 +33,9 @@ class PropertiesMap {
   /**
    * Updates the markers on the map based on the specified properties json array.
    */
-  updateMarkers(properties) {
-    this.map.removeSource(this.sourceId);
-    this.markers = this._createMarkers(properties);
-    this._addMarkersOnMap();
+  updateMap(lnglat, properties) {
+    this._updateMarkers(properties);
+    this._updateCenter(lnglat);
   }
 
 
@@ -48,14 +47,14 @@ class PropertiesMap {
   _setupEventListeners() {
     // Wait until the map is loaded.
     // Set up initial behavior of the map.
-    this.map.on('load', () => {
+    this.mapboxglMap.on('load', () => {
       this._addMarkersOnMap();
     });
 
     // Show popup on click.
-    this.map.on('click', (event) => {
+    this.mapboxglMap.on('click', (event) => {
 
-      const markers = this.map.queryRenderedFeatures(event.point, {
+      const markers = this.mapboxglMap.queryRenderedFeatures(event.point, {
           layers: ['properties']
       });
 
@@ -63,19 +62,22 @@ class PropertiesMap {
           return;
       }
 
+      // Pan the map view to the clicked location.
+      this.mapboxglMap.panTo(markers[0].geometry.coordinates)
+
       // Populate the popup and set its coordinates
       // based on the feature found.
       new mapboxgl.Popup()
           .setLngLat(markers[0].geometry.coordinates)
           .setHTML(markers[0].properties.description)
-          .addTo(this.map);
+          .addTo(this.mapboxglMap);
     });
 
     // Do something when user finish moving the map.
-    this.map.on('moveend', () => {
+    this.mapboxglMap.on('moveend', () => {
 
       // TODO: do something.
-      console.log("moveend: ", this.map.getCenter())
+      console.log("moveend: ", this.mapboxglMap.getCenter())
 
     });
   } // end _setupEventListeners
@@ -105,7 +107,7 @@ class PropertiesMap {
    */
   _addMarkersOnMap() {
     // Add a GeoJSON source containing place coordinates and information.
-    this.map.addSource(this.sourceId, {
+    this.mapboxglMap.addSource(this.sourceId, {
         "type": "geojson",
         "data": {
             "type"    : "FeatureCollection",
@@ -114,7 +116,7 @@ class PropertiesMap {
     });
 
     // Add a layer showing the places based on the specified source.
-    this.map.addLayer({
+    this.mapboxglMap.addLayer({
         "id"    : this.sourceId,
         "type"  : "symbol",
         "source": "properties",
@@ -152,6 +154,24 @@ class PropertiesMap {
     console.log(`  created markers: ${markers}`);
 
     return markers;
+  }
+
+  /**
+   * Removes all existing markers and adds new markers.
+   * @param  {Array<Object>} properties an array of hashes with keys lngLat and description.
+   */
+  _updateMarkers(properties) {
+    this.mapboxglMap.removeSource(this.sourceId);
+    this.markers = this._createMarkers(properties);
+    this._addMarkersOnMap();
+  }
+
+  /**
+   * Moves the center of the map to the specified lngLat.
+   * @param  {Array<Float>} initialCenterLngLat
+   */
+  _updateCenter(lnglat) {
+    this.mapboxglMap.panTo(lnglat);
   }
 
 } // endclass

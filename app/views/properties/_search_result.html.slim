@@ -2,6 +2,7 @@
 .card-columns
   - url_types = %w(city food nightlife nature technics transport abstract)
   - @properties.each do |property|
+    / http://guides.rubyonrails.org/caching_with_rails.html
     - cache property
       .card
         img.card-img-top [

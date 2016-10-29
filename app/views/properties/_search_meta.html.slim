@@ -1,6 +1,6 @@
 .navbar-text.search_meta
   span = pluralize(@properties.try!(:total_count), "result")
-  span = search_conditions_text(@search_conditions)
+  span = search_filters_text(@search_filters)
 
 css: 
   .search_meta > span {

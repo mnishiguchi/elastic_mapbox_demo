@@ -11,17 +11,16 @@ $('#search_meta').html(
   '<%= j(render "search_meta", search_conditions: @search_conditions) %>'
 );
 
-// Update the title.
+// Replace the query term with the formatted one.
+$('#q').val('<%= j(@formatted_query) %>')
+
+// Update the webpage title.
 $('title').html(
   '<%= j(properties_title) %>'
 );
 
-// Update the markers.
-window.App.maps.currentMap.updateMarkers(
+// Update the map's center and the markers.
+window.App.maps.currentMap.updateMap(
+  <%= raw @center_lng_lat %>,
   <%= raw @json %>
-);
-
-// Update the map's center.
-window.App.maps.currentMap.map.panTo(
-  <%= raw @center_lng_lat %>
 );

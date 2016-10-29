@@ -4,17 +4,12 @@ module PropertiesHelper
     "#{pluralize(@properties.count, "apartment")} found"
   end
 
-  def search_conditions_text(search_conditions)
-    return if search_conditions.nil?
-    # search_conditions["q"]
-    # search_conditions["rent_min"]
-    # search_conditions["rent_max"]
-    # search_conditions["bedroom_count"]
-    # search_conditions["bathroom_count"]
+  def search_filters_text(search_filters)
+    return if search_filters.nil?
 
     [].tap do |sc_text|
-      sc_text << rent_condition_text(search_conditions["rent_min"], search_conditions["rent_max"])
-      sc_text << room_count_condition_text(search_conditions["bedroom_count"], search_conditions["bathroom_count"])
+      sc_text << rent_condition_text(search_filters[:rent_min], search_filters[:rent_max])
+      sc_text << room_count_condition_text(search_filters[:bedroom_count], search_filters[:bathroom_count])
       sc_text.compact!
       sc_text.insert(1, " | ") if sc_text.size > 1
     end.join("")

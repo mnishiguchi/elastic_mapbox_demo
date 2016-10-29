@@ -13,8 +13,8 @@ scss:
   
   .properties_index {
     .mapboxgl-popup {
-      max-width: 150px;
-      max-height: 300px;
+      max-width: 400px;
+      max-height: 200px;
       overflow-y: auto;
     }
     
@@ -50,7 +50,7 @@ javascript:
   // http://yehudakatz.com/2010/02/01/safebuffers-and-rails-3-0/
   window.App.maps.currentMap = new window.App.maps.PropertiesMap(
     #{ raw @center_lng_lat }, 
-    #{ raw Property.properties_json_for_map(@properties) }
+    #{ raw Property.json_for_map(@properties) }
   );
 
 
