@@ -1,8 +1,6 @@
 .navbar-text.search_meta
-  span = pluralize(@properties.total_count, "result")
-  span = search_conditions_text(search_conditions)
-  - if @properties.respond_to?(:took)
-    span = "performed in #{took_in_seconds(@properties)} seconds"
+  span = pluralize(@properties.try!(:total_count), "result")
+  span = search_conditions_text(@search_conditions)
 
 css: 
   .search_meta > span {

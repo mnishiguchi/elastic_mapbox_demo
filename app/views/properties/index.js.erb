@@ -3,13 +3,25 @@
 
 // Update the search result.
 $('#search_result').html(
-  '<%= j(render "search_result", collection: @floorplans) %>'
+  '<%= j(render "search_result") %>'
 );
 
+// Update the search meta.
 $('#search_meta').html(
-  '<%= j(render "search_meta", collection: @floorplans, search_conditions: @search_conditions) %>'
+  '<%= j(render "search_meta", search_conditions: @search_conditions) %>'
 );
 
-// Update the markers passing JSON data to frontend.
-var properties = <%= raw Property.properties_json_for_map(@properties) %>
-window.App.maps.currentMap.updateMarkers(properties);
+// Update the title.
+$('title').html(
+  '<%= j(properties_title) %>'
+);
+
+// Update the markers.
+window.App.maps.currentMap.updateMarkers(
+  <%= raw @json %>
+);
+
+// Update the map's center.
+window.App.maps.currentMap.map.panTo(
+  <%= raw @center_lng_lat %>
+);

@@ -5,6 +5,18 @@ class PropertiesController < ApplicationController
                     query:   params[:q],
                     options: search_params,
                   ).search
+
+    @json = Property.properties_json_for_map(@properties)
+
+    @center_lng_lat = begin
+      lngs = @properties.pluck(:longitude)
+      lats = @properties.pluck(:latitude)
+      [
+        lngs.reduce(:+) / lngs.size,
+        lats.reduce(:+) / lats.size,
+      ]
+    end
+
     @search_conditions = {
       "q"              => search_params[:q],
       "rent_min"       => search_params[:rent_min],

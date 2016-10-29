@@ -1,5 +1,9 @@
 module PropertiesHelper
 
+  def properties_title
+    "#{pluralize(@properties.count, "apartment")} found"
+  end
+
   def search_conditions_text(search_conditions)
     return if search_conditions.nil?
     # search_conditions["q"]
