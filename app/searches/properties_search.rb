@@ -51,6 +51,12 @@ class PropertiesSearch
   private def where
     where = {}
 
+    # # https://github.com/ankane/searchkick#geospatial-searches
+    # if @search_params[:lng_lat].present?
+    #   lng, lat = @search_params[:lng_lat].split(',').map(&:to_f)
+    #   where[:location] = { near: { lat: lat, lon: lng }, within: "100mi" }
+    # end
+
     if @search_params[:rent_min].present?
       where[:rent_min] = { gte: @search_params[:rent_min] }
     end
@@ -68,6 +74,8 @@ class PropertiesSearch
       # NOTE: @search_params[:bathroom_count] is a string
       where[:floorplan_bathroom_count] = { lte: @search_params[:bathroom_count].to_i }
     end
+
+    ap where
 
     return where
   end

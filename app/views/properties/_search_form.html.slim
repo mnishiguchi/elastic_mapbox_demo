@@ -7,6 +7,9 @@
       name="q" 
       placeholder="Search by location"
     ]
+    input#latitude [name="latitude" type="hidden" value=""] /
+    input#longitude [name="longitude" type="hidden" value=""] /
+
     .input-group-btn
       button.btn.btn-outline-success [type="submit"]
         = fa_icon("search")

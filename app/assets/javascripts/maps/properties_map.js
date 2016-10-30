@@ -22,9 +22,17 @@ class PropertiesMap {
     constructor(lngLat, properties) {
         console.log('instantiating PropertiesMap');
 
-        this.sourceId    = "properties"
-        this.mapboxglMap = this._createMap(lngLat);
-        this.markers     = this._createMarkers(properties);
+        this.markerSourceId = "properties";
+        this.markerLayerIds = [
+          "properties-layer"
+        ];
+        this.countySourceId = "counties";
+        this.countyLayerIds = [
+          "counties-layer",
+          "counties-layer-highlighted"
+        ];
+        this.mapboxglMap   = this._createMap(lngLat);
+        this.markers       = this._createMarkers(properties);
 
         this._setupEventListeners();
     }
@@ -33,9 +41,10 @@ class PropertiesMap {
     /**
      * Updates the markers on the map based on the specified properties json array.
      */
-    updateMap(lnglat, properties) {
+    updateMap(lngLat, properties) {
+        console.log("updateMap");
         this._updateMarkers(properties);
-        this._updateCenter(lnglat);
+        this._updateCenter(lngLat);
     }
 
 
@@ -48,14 +57,17 @@ class PropertiesMap {
         // Wait until the map is loaded.
         // Set up initial behavior of the map.
         this.mapboxglMap.on('load', () => {
-           this._addMarkersOnMap();
+           this._addMarkerLayer();
+           this._addCountyLayer();
         });
 
         // Show popup on click.
         this.mapboxglMap.on('click', (event) => {
 
           const markers = this.mapboxglMap.queryRenderedFeatures(event.point, {
-              layers: ['properties']
+              layers: [
+                this.markerLayerIds[0]
+              ]
           });
 
           // Pan the map view to the clicked location.
@@ -70,6 +82,45 @@ class PropertiesMap {
                   .addTo(this.mapboxglMap);
           }
         });
+
+        // this.mapboxglMap.on('mousemove', (event) => {
+        //   const features = this.mapboxglMap.queryRenderedFeatures(event.point, {
+        //       layers: [
+        //         this.countyLayerIds[0]
+        //       ]
+        //   });
+        //
+        //   // Single out the first found feature on mouseove.
+        //   const feature = features[0];
+        //
+        //   const overlay = document.getElementById('map-overlay');
+        //
+        //   // Create a popup, but don't add it to the map yet.
+        //   const popup = new mapboxgl.Popup({
+        //       closeButton: false
+        //   });
+        //
+        //   // Remove things if no feature was found.
+        //   if (!features.length) {
+        //       popup.remove();
+        //       this.mapboxglMap.setFilter(this.countyLayerIds[1], ['in', 'COUNTY', '']);
+        //       overlay.style.display = 'none';
+        //       return;
+        //   }
+        //
+        //   // Display a popup with the name of the county
+        //   popup.setLngLat(event.lngLat)
+        //       .setText(feature.properties.COUNTY)
+        //       .addTo(map);
+        //
+        //   // Query the counties layer visible in the map. Use the filter
+        //   // param to only collect results that share the same county name.
+        //   const relatedFeatures = this.mapboxglMap.querySourceFeatures(this.countySourceId, {
+        //       sourceLayer: 'original',
+        //       filter: ['in', 'COUNTY', feature.properties.COUNTY]
+        //   });
+        // });
+
 
         // Do something when user finish moving the map.
         this.mapboxglMap.on('moveend', () => {
@@ -100,29 +151,57 @@ class PropertiesMap {
 
 
     /**
-     * @param {mapboxgl.Map} map
-     * @param {Array<Object>} an array of markerpoint hashes
      */
-    _addMarkersOnMap() {
+    _addMarkerLayer() {
         // Add a GeoJSON source containing place coordinates and information.
-        this.mapboxglMap.addSource(this.sourceId, {
+        this.mapboxglMap.addSource(this.markerSourceId, {
             "type": "geojson",
             "data": {
                 "type"    : "FeatureCollection",
                 "features": this.markers
             }
         });
-
-        // Add a layer showing the places based on the specified source.
         this.mapboxglMap.addLayer({
-            "id"    : this.sourceId,
+            "id"    : this.markerLayerIds[0],
             "type"  : "symbol",
-            "source": "properties",
+            "source": this.markerSourceId,
             "layout": {
                 "icon-image"        : "{icon}-15",
                 "icon-allow-overlap": true
             }
         });
+    }
+
+
+    /**
+     */
+    _addCountyLayer() {
+        this.mapboxglMap.addSource(this.countySourceId, {
+            "type": "vector",
+            "url": "mapbox://mapbox.82pkq93d"
+        });
+        this.mapboxglMap.addLayer({
+            "id": this.countyLayerIds[0],
+            "type": "fill",
+            "source": this.countySourceId,
+            "source-layer": "original",
+            "paint": {
+                "fill-outline-color": "rgba(0,0,0,0.1)",
+                "fill-color": "rgba(0,0,0,0.1)"
+            }
+        }, 'place-city-sm'); // Place polygon under these labels.
+        this.mapboxglMap.addLayer({
+            "id": this.countyLayerIds[1],
+            "type": "fill",
+            "source": this.countySourceId,
+            "source-layer": "original",
+            "paint": {
+                "fill-outline-color": "#484896",
+                "fill-color": "#6e599f",
+                "fill-opacity": 0.75
+            },
+            "filter": ["in", "COUNTY", ""]
+        }, 'place-city-sm'); // Place polygon under these labels.
     }
 
 
@@ -159,17 +238,18 @@ class PropertiesMap {
      * @param  {Array<Object>} properties an array of hashes with keys lngLat and description.
      */
     _updateMarkers(properties) {
-        this.mapboxglMap.removeSource(this.sourceId);
+        this.mapboxglMap.removeSource(this.markerSourceId);
         this.markers = this._createMarkers(properties);
-        this._addMarkersOnMap();
+        this._addMarkerLayer();
     }
 
     /**
      * Moves the center of the map to the specified lngLat.
      * @param  {Array<Float>} initialCenterLngLat
      */
-    _updateCenter(lnglat) {
-        this.mapboxglMap.panTo(lnglat);
+    _updateCenter(lngLat) {
+        console.log("_updateCenter");
+        this.mapboxglMap.panTo(lngLat);
     }
 
 } // endclass

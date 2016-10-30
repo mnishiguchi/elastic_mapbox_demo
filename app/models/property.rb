@@ -45,6 +45,8 @@ class Property < ApplicationRecord
       :formatted_address,
     ]
     merge = {
+      # https://github.com/ankane/searchkick#geospatial-searches
+      location: { lat: latitude, lon: longitude },
       floorplan_bedroom_count:  floorplans&.map(&:bedroom_count).uniq.sort,
       floorplan_bathroom_count: floorplans&.map(&:bathroom_count).uniq.sort,
     }
@@ -105,14 +107,8 @@ class Property < ApplicationRecord
   end
 
   def self.center_lng_lat(properties)
-    lngs = properties.pluck(:longitude)
-    lats = properties.pluck(:latitude)
-    return nil if lngs.empty? || lats.empty?
-
-    [
-      lngs.reduce(:+) / lngs.size,
-      lats.reduce(:+) / lats.size,
-    ]
+    lat, lng = Geocoder::Calculations.geographic_center(properties)
+    [lng, lat]
   end
 
   private def full_address

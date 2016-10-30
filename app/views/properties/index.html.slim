@@ -9,49 +9,21 @@
     #search_result.search_result
       = render "search_result"
 
-scss:
-  
-  .properties_index {
-    .mapboxgl-popup {
-      max-width: 400px;
-      max-height: 200px;
-      overflow-y: auto;
-    }
-    
-    .btn.btn-outline-secondary {
-      color: #666;
-    }
-  }
-  
-  .properties_index__content {
-    position: absolute;
-    height: 100%; 
-    width: 100%;
-    .map {
-      position: absolute; 
-      height: 100%; 
-      width: 100%;
-    }
-    .search_result {
-      position: absolute;
-      height: 100%; 
-      width: 100%;
-      max-height: 100vh; 
-      overflow-y: auto;
-      padding: 1rem;
-      background-color: rgba(0,0,0,0.5);
-    }
-  }
-
-
 javascript:
 
   // Create a map initializing with that data.
   // http://yehudakatz.com/2010/02/01/safebuffers-and-rails-3-0/
   window.App.maps.currentMap = new window.App.maps.PropertiesMap(
-    #{ raw @center_lng_lat }, 
-    #{ raw Property.json_for_map(@properties) }
+      #{ raw @center_lng_lat }, 
+      #{ raw Property.json_for_map(@properties) }
   );
+
+
+  //  window.App.maps.currentMap.mapboxglMap.on("click", function(event) {
+  //      $('#latitude').val(event.lngLat.lat);
+  //      $('#longitude').val(event.lngLat.lng);
+  //      $('#search_form > form').submit();
+  //  });
 
 
   //---
