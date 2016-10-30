@@ -25,7 +25,7 @@
 
 class Property < ApplicationRecord
 
-  searchkick
+  searchkick locations: ["location"]
 
   belongs_to :management
   has_many :floorplans
@@ -53,45 +53,16 @@ class Property < ApplicationRecord
     attributes.symbolize_keys.slice(*slice).merge(merge)
   end
 
+
   def rent_minmax_text
     "$#{rent_min} - #{rent_max}"
   end
+
 
   def lng_lat
     [ longitude, latitude ]
   end
 
-  # Prepares json data that can be used for creating a Map.
-  def self.json_for_map(properties)
-    # Obtain lists of attributes.
-    name_list        = properties.map(&:name)
-    description_list = properties.map(&:description)
-    lng_lat_list     = properties.map(&:lng_lat)
-
-    map_hash = []
-    name_list.zip(description_list, lng_lat_list).each do |attrs|
-      map_hash << {
-        "name"        => attrs[0],
-        "description" => self.description_html(
-                           title:    attrs[0],
-                           body:     attrs[1],
-                           link_url: "#"
-                         ),
-        "lngLat"      => attrs[2]
-      }
-    end
-
-    map_hash.to_json
-  end
-
-  # Generate an HTML for a map marker popup.
-  def self.description_html(title:, body:, link_url:)
-    <<-HTML
-      <h6>#{title}</h6>
-      <p>#{body}</p>
-      <a href=#{link_url}>link</a>
-    HTML
-  end
 
   # Invoked when a Floorplan is updated.
   def update_rent_minmax(rent)
@@ -106,14 +77,11 @@ class Property < ApplicationRecord
     end
   end
 
-  def self.center_lng_lat(properties)
-    lat, lng = Geocoder::Calculations.geographic_center(properties)
-    [lng, lat]
-  end
 
   private def full_address
     "#{address}, #{city}, #{state} #{zip}"
   end
+
 
   # A before-filter to clean up address string with geocoder.
   private def format_address

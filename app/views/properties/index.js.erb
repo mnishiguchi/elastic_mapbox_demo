@@ -8,7 +8,7 @@ $('#search_result').html(
 
 // Update the search meta.
 $('#search_meta').html(
-  '<%= j(render "search_meta", search_conditions: @search_conditions) %>'
+  '<%= j(render "search_meta", search_filters: @search_filters) %>'
 );
 
 // Replace the query term with the formatted one.
@@ -22,5 +22,5 @@ $('title').html(
 // Update the map's center and the markers.
 window.App.maps.currentMap.updateMap(
   <%= raw @center_lng_lat %>,
-  <%= raw @json %>
+  <%= raw @json_for_map %>
 );

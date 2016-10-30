@@ -1,11 +1,12 @@
 class PropertiesController < ApplicationController
 
   def index
-    search           = PropertiesSearch.new(search_params)
-    @properties      = search.search
-    @formatted_query = search.formatted_query
-    @json            = Property.json_for_map(@properties)
-    @center_lng_lat  = Property.center_lng_lat(@properties) || search.query_lng_lat
+    search = PropertiesSearch.new(search_params).search
+
+    @properties      = search[:results]
+    @formatted_query = search[:formatted_query]
+    @json_for_map    = search[:json_for_map]
+    @center_lng_lat  = search[:center_lng_lat]
     @search_filters  = search_params.slice(
                           :rent_min,
                           :rent_max,

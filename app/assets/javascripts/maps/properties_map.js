@@ -23,9 +23,7 @@ class PropertiesMap {
         console.log('instantiating PropertiesMap');
 
         this.markerSourceId = "properties";
-        this.markerLayerIds = [
-          "properties-layer"
-        ];
+        this.markerLayerId =  "properties-layer";
         this.countySourceId = "counties";
         this.countyLayerIds = [
           "counties-layer",
@@ -44,7 +42,15 @@ class PropertiesMap {
     updateMap(lngLat, properties) {
         console.log("updateMap");
         this._updateMarkers(properties);
-        this._updateCenter(lngLat);
+        this.updateCenter(lngLat);
+    }
+
+
+    /**
+     * @return true if a marker exists at the specified lngLat.
+     */
+    isMarkerAtLngLat(lngLat) {
+        return this._markersAtLngLat(lngLat).length > 0;
     }
 
 
@@ -54,6 +60,7 @@ class PropertiesMap {
 
 
     _setupEventListeners() {
+
         // Wait until the map is loaded.
         // Set up initial behavior of the map.
         this.mapboxglMap.on('load', () => {
@@ -61,65 +68,11 @@ class PropertiesMap {
            this._addCountyLayer();
         });
 
+
         // Show popup on click.
         this.mapboxglMap.on('click', (event) => {
-
-          const markers = this.mapboxglMap.queryRenderedFeatures(event.point, {
-              layers: [
-                this.markerLayerIds[0]
-              ]
-          });
-
-          // Pan the map view to the clicked location.
-          this.mapboxglMap.panTo(event.lngLat)
-
-          if (markers.length) {
-              // Populate the popup and set its coordinates
-              // based on the feature found.
-              new mapboxgl.Popup()
-                  .setLngLat(markers[0].geometry.coordinates)
-                  .setHTML(markers[0].properties.description)
-                  .addTo(this.mapboxglMap);
-          }
+            this._onClickMarker(event);
         });
-
-        // this.mapboxglMap.on('mousemove', (event) => {
-        //   const features = this.mapboxglMap.queryRenderedFeatures(event.point, {
-        //       layers: [
-        //         this.countyLayerIds[0]
-        //       ]
-        //   });
-        //
-        //   // Single out the first found feature on mouseove.
-        //   const feature = features[0];
-        //
-        //   const overlay = document.getElementById('map-overlay');
-        //
-        //   // Create a popup, but don't add it to the map yet.
-        //   const popup = new mapboxgl.Popup({
-        //       closeButton: false
-        //   });
-        //
-        //   // Remove things if no feature was found.
-        //   if (!features.length) {
-        //       popup.remove();
-        //       this.mapboxglMap.setFilter(this.countyLayerIds[1], ['in', 'COUNTY', '']);
-        //       overlay.style.display = 'none';
-        //       return;
-        //   }
-        //
-        //   // Display a popup with the name of the county
-        //   popup.setLngLat(event.lngLat)
-        //       .setText(feature.properties.COUNTY)
-        //       .addTo(map);
-        //
-        //   // Query the counties layer visible in the map. Use the filter
-        //   // param to only collect results that share the same county name.
-        //   const relatedFeatures = this.mapboxglMap.querySourceFeatures(this.countySourceId, {
-        //       sourceLayer: 'original',
-        //       filter: ['in', 'COUNTY', feature.properties.COUNTY]
-        //   });
-        // });
 
 
         // Do something when user finish moving the map.
@@ -162,7 +115,7 @@ class PropertiesMap {
             }
         });
         this.mapboxglMap.addLayer({
-            "id"    : this.markerLayerIds[0],
+            "id"    : this.markerLayerId,
             "type"  : "symbol",
             "source": this.markerSourceId,
             "layout": {
@@ -247,11 +200,34 @@ class PropertiesMap {
      * Moves the center of the map to the specified lngLat.
      * @param  {Array<Float>} initialCenterLngLat
      */
-    _updateCenter(lngLat) {
-        console.log("_updateCenter");
+    updateCenter(lngLat) {
+        console.log("updateCenter");
+        console.log(lngLat);
         this.mapboxglMap.panTo(lngLat);
     }
 
+
+    _onClickMarker(event) {
+
+        const markers = this._markersAtLngLat(event.point);
+
+        if (markers.length) {
+            // Populate the popup and set its coordinates
+            // based on the feature found.
+            new mapboxgl.Popup()
+                .setLngLat(markers[0].geometry.coordinates)
+                .setHTML(markers[0].properties.description)
+                .addTo(this.mapboxglMap);
+        }
+    }
+
+    _markersAtLngLat(lngLat) {
+      return  this.mapboxglMap.queryRenderedFeatures(lngLat, {
+          layers: [
+            this.markerLayerId
+          ]
+      });
+    }
 } // endclass
 
 
