@@ -100,11 +100,31 @@ heroku run rake searchkick:reindex:all
 
 ## Get started
 
-```bash
-bundle install
-bundle exec rake db:migrate
-bundle exec rake db:seed
 ```
+rake db:create
+```
+
+```
+rake db:migrate
+```
+
+```
+rake db:seed
+```
+
+```
+npm install
+```
+
+```
+elasticsearch
+```
+
+```
+rails s
+```
+
+Visit localhost:3000
 
 ---
 
@@ -115,7 +135,6 @@ bundle exec rake db:seed
 
 
 ---
-
 
 
 ## Resources
@@ -137,25 +156,7 @@ bundle exec rake db:seed
 - [How to setup elasticsearch on Heroku?](http://stackoverflow.com/a/38657992/3837223)
 
 
----
-
-
-## TODO
-
-#### Add markers for search results on the map
-- get a list of lnglats for search result.
-- pass the lnglat list to mapbox.
-- add search result markers to map.
-
-#### update markers when map has been moved.
-- get the center lnglat when user stop moving the map.
-- geo-search with that lnglat.
-
-#### get user's current location
-- get address from ip.
-
-
-#### Some resources
+#### Others
 - [#Map.event:moveend](https://www.mapbox.com/mapbox-gl-js/api/#Map.event:moveend)
 - [#Map#getCenter](https://www.mapbox.com/mapbox-gl-js/api/#Map#getCenter)
 - [Set a point after Geocoder result](https://www.mapbox.com/mapbox-gl-js/example/point-from-geocoder-result/)
