@@ -13,33 +13,33 @@ javascript:
 
   // Create a map initializing with that data.
   // http://yehudakatz.com/2010/02/01/safebuffers-and-rails-3-0/
-  window.App.maps.currentMap = new window.App.maps.PropertiesMap(
-      #{ raw @center_lng_lat }, 
+  window.app.currentMap = window.app.initializePropertiesMap(
+      #{ raw @center_lng_lat },
       #{ raw @json_for_map }
   );
 
 
-  window.App.maps.currentMap.mapboxglMap.on("click", function(event) {
-  
+  window.app.currentMap.mapboxglMap.on("click", function(event) {
+
       // Ignore if the user clicked a marker.
-      if (window.App.maps.currentMap.isMarkerAtLngLat(event.point)) {
+      if (window.app.currentMap.isMarkerAtLngLat(event.point)) {
         console.log("clickedMarker")
         return;
       }
-      
+
       // Move the map's center to the clicked location.
-      window.App.maps.currentMap.updateCenter(event.lngLat);
-      
+      window.app.currentMap.updateCenter(event.lngLat);
+
       // Clear the search term.
       $('#q').val("");
-      
+
       // Set the lngLat values on the hidden fields.
       $('#latitude').val(event.lngLat.lat);
       $('#longitude').val(event.lngLat.lng);
-      
+
       // Submit the search.
       $('#search_form > form').submit();
-      
+
       // Clear the lngLat values.
       $('#latitude').val("");
       $('#longitude').val("");
@@ -55,7 +55,7 @@ javascript:
     $('#map').show();
     $('#search_result').hide();
   })
-  
+
   // Toggle search_result.
   $('#search_result_toggle').on('click', function() {
     $('#search_result').show();

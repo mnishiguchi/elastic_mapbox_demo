@@ -20,7 +20,7 @@ $('title').html(
 );
 
 // Update the map's center and the markers.
-window.App.maps.currentMap.updateMap(
+window.app.currentMap.updateMap(
   <%= raw @center_lng_lat %>,
   <%= raw @json_for_map %>
 );
