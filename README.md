@@ -173,4 +173,4 @@ Visit localhost:3000
 
 ## License
 
-This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
+This work is licensed under a [WTFPL – Do What the Fuck You Want to Public License](http://www.wtfpl.net/)
